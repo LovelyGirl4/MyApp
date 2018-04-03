@@ -1,14 +1,16 @@
 import React, {Component} from 'react'
-import { View, Text, StyleSheet, TextInput, CheckBox } from 'react-native'
-import { WhiteSpace, WingBlank, List, InputItem, Button } from 'antd-mobile'
+import { View, Text, StyleSheet, Image } from 'react-native'
+import { Flex, WhiteSpace, WingBlank, List, InputItem, Button, Checkbox } from 'antd-mobile'
 import { createForm } from 'rc-form'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
-// const CheckboxItem = Checkbox.CheckboxItem
+const CheckboxItem = Checkbox.CheckboxItem
 
 class Login extends Component {
     render() {
         const { getFieldProps } = this.props.form
         return <View>
+            {/*<Image style={styles.avator} source={require('../../asset/a.jpeg')} />*/}
+            <Text style={styles.login}>登录页面</Text>
             <WingBlank size="lg">
                 <InputItem
                     style={styles.input}
@@ -22,9 +24,18 @@ class Login extends Component {
                     type="password"
                     placeholder="****"
                 ><Icon name="key" size={26} color="#4F8EF7" /></InputItem>
-                <Text style={styles.findPassword}>找回密码</Text>
+                <Flex>
+                    <Flex.Item>
+                        <CheckboxItem style={styles.checkbox}>
+                            <Text style={styles.remember}>记住密码</Text>
+                        </CheckboxItem>
+                    </Flex.Item>
+                    <Flex.Item>
+                        <Text style={styles.findPassword}>找回密码?</Text>
+                    </Flex.Item>
+                </Flex>
                 <Button type="primary" style={styles.button}>登录</Button>
-                <CheckBox value='记住密码'/>       
+                <Text style={styles.register}>还没账号？立即注册</Text>   
             </WingBlank>
         </View>
     }
@@ -36,11 +47,36 @@ export default LoginWrapper
 
 
 const styles = StyleSheet.create({
-    findPassword: {
-        lineHeight: 30,
-        textAlign: 'right',
+    // avator: {
+    //     height: 60,
+    //     width: 60,
+    //     borderRadius: 25,
+    //     resizeMode: 'center',
+    // },
+    login: {
+        fontSize: 20,
+        fontWeight: 'bold',
+        textAlign: 'center',
         color: '#008AE6',
+        marginTop: 40,
+        marginBottom: 20
+    },
+    findPassword: {
+        fontSize: 15,
+        textAlign: 'right',
+        color: 'grey',
         marginRight: 15
+    },
+    remember: {
+        fontSize: 15,
+        color: 'grey',
+    },
+    register: {
+        fontSize: 15,
+        color: '#008AE6',
+        marginTop: 10,
+        marginRight: 15,
+        textAlign: 'right'
     },
     input: {
         marginLeft: 15,
@@ -49,5 +85,8 @@ const styles = StyleSheet.create({
     button: {
         marginLeft: 15,
         marginRight: 15
+    },
+    checkbox: {
+        backgroundColor: 'rgba(255, 255, 255, 0)',
     }
 })
