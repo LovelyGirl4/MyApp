@@ -1,0 +1,10 @@
+// login
+export const DOLOGIN = 'DOLOGIN'
+export const DOLOGIN_SUCCESS = 'DOLOGIN_SUCCESS'
+export const DOLOGIN_ERROR = 'DOLOGIN_ERROR'
+export const TOKEN_LOGIN = 'TOKEN_LOGIN'
+export const TOKEN_LOGIN_SUCCESS = 'TOKEN_LOGIN_SUCCESS'
+export const TOKEN_LOGIN_ERROR = 'TOKEN_LOGIN_ERROR'
+
+
+
