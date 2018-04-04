@@ -12,6 +12,7 @@ import store from './src/store'
 import { StackNavigator, TabNavigator, TabBarBottom } from 'react-navigation'
 import { Platform, StyleSheet, Text, View } from 'react-native'
 import { MainScreen, ProfileScreen, LoginComponent } from './src/components/index'
+import Login from './src/containers/login/index'
 import Icon from 'react-native-vector-icons/Ionicons'
 
 
@@ -91,7 +92,7 @@ export default class App extends Component {
     render() {
         return (
             <Provider store={store}>
-                <Home/>
+                <Login/>
             </Provider>
         )
     }

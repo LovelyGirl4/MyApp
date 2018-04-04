@@ -3,13 +3,15 @@ import { put, take, call, select } from 'redux-saga/effects'
 import { DOLOGIN, DOLOGIN_SUCCESS, DOLOGIN_ERROR, TOKEN_LOGIN, TOKEN_LOGIN_SUCCESS } from '../constants/ActionTypes'
 import { doLogin } from '../api/index'
 
-function* fetchLoginFunc(username, password) {
+function* doLoginFunc(username, password) {
     try {
         yield put({ type: DOLOGIN, fetching: true })
-        const { access_token } = yield call(doLogin, username, password)
+        console.log('doLogin:', doLogin)
+        // const { access_token } = yield call(doLogin, username, password)
+        // console.log('access_token:', access_token)
         // yield put({ type: AUTHENTICATED_SUCCESS, token: access_token })
         // 将token存进localStorage
-        window.localStorage.setItem('token', access_token)
+        // window.localStorage.setItem('token', access_token)
         // yield put(push('/home'))
         yield put({ type: DOLOGIN_SUCCESS })
     } catch (e) {
@@ -29,7 +31,7 @@ export default {
     watchLogin: function* () {
         while (true) {
             const { username, password } = yield take(DOLOGIN)
-            const token = yield call(fetchLoginFunc, username, password)
+            const token = yield call(doLoginFunc, username, password)
         }
     },
     watchTokenLogin: function* () {
