@@ -32,7 +32,6 @@ class Login extends Component {
     render() {
         const { getFieldProps } = this.props.form
         const { username, password } = this.state
-        console.log('this.state:', this.state)
         return <View>
             {/*<Image style={styles.avator} source={require('../../asset/a.jpeg')} />*/}
             <Text style={styles.login}>登录页面</Text>

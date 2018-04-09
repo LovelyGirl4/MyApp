@@ -38,9 +38,7 @@ const _fetchJson = (url, option = {}) => {
 
 // 登录获得token TODO
 export const doLogin = (username, password) => {
-    console.log('username:', username)
-    console.log('password:', password)
-    return fetch('http://bbs.reactnative.cn/api/category/3', {
+    return _fetch('/oauth/token', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded'
@@ -53,8 +51,5 @@ export const doLogin = (username, password) => {
             client_secret: '',
             scope: ''
         })
-    }).then(res => {
-        console.log('res:', res)
-        return res.json()
     })
 }

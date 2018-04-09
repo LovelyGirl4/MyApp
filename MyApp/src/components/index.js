@@ -4,4 +4,6 @@ export { default as ProfileScreen } from './common/ProfileScreen'
 
 // login
 export { default as LoginComponent} from './login/index'
+// home
+export { default as HomeComponent} from './home/index'
 
