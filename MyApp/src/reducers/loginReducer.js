@@ -1,11 +1,15 @@
-import { DOLOGIN_SUCCESS } from '../constants/ActionTypes'
+import { DO_LOGIN_SUCCESS, TOKEN_LOGIN_SUCCESS } from '../constants/ActionTypes'
 
-const initialState = {}
+const initialState = {
+    accessToken: ''
+}
 
 const loginReducer = (state = initialState, action) => {
     switch (action.type) {
-    case DOLOGIN_SUCCESS:
-        return { ...state }
+    case DO_LOGIN_SUCCESS:
+        return { ...state, accessToken: action.accessToken }
+    case TOKEN_LOGIN_SUCCESS:
+        return { ...state, accessToken: action.accessToken }
     default:
         return state
     }

@@ -6,4 +6,6 @@ export { default as ProfileScreen } from './common/ProfileScreen'
 export { default as LoginComponent} from './login/index'
 // home
 export { default as HomeComponent} from './home/index'
+// ticket
+export { default as TicketComponent} from './ticket/index'
 

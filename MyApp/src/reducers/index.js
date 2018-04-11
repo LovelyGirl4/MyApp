@@ -1,9 +1,10 @@
 import { combineReducers } from 'redux'
-import loginReducer from './loginReducer'
+import { storage } from '../storage'
+import login from './loginReducer'
+import ticket from './ticketReducer'
 
 const initialState = {
-    // token: getToken(),
-    token: '123'
+    token: ''
 }
 
 const app = (state = initialState, a) => {
@@ -21,5 +22,6 @@ const app = (state = initialState, a) => {
 
 export default combineReducers({
     app,
-    loginReducer
+    login,
+    ticket
 })

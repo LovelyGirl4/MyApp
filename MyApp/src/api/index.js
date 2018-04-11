@@ -1,4 +1,4 @@
-// import {fetch} from 'react-native'
+import store from '../store'
 
 let API_DOMAIN = 'http://api.test.autopartshub.com'
 let API_CLIENT_ID = 'd2ViOnNlY3JldA=='
@@ -22,19 +22,18 @@ const _fetchJson = (url, option = {}) => {
         }
     })
 }
-// const _authedFetch = (url, option = {}) => {
-//     // token: 1.从store里取 2.从缓存里取
-//     const access_token = store().getState().app.token
-//     // const access_token = window.localStorage.getItem('token')
-//     return _fetch(url, {
-//         ...option,
-//         headers: {
-//             ...option.headers,
-//             'Authorization': `Bearer ${access_token}`,
-//             'Content-Type': 'application/json'
-//         }
-//     }).then()
-// }
+const _authedFetch = (url, option = {}) => {
+    // token: 1.从store里取 2.从缓存里取
+    const access_token = store.getState().login.accessToken
+    return _fetch(url, {
+        ...option,
+        headers: {
+            ...option.headers,
+            'Authorization': `Bearer ${access_token}`,
+            'Content-Type': 'application/json'
+        }
+    }).then()
+}
 
 // 登录获得token TODO
 export const doLogin = (username, password) => {
@@ -53,3 +52,16 @@ export const doLogin = (username, password) => {
         })
     })
 }
+export const fetchTickets = (pagination = {current: 1}) => {
+    return _authedFetch(`/api/products?page=${pagination.current}`)
+}
+// export const fetchProductList = (pagination, supplier_ids, category_id, filterValue) => {
+//     const newPagination = pagination ? pagination : { current: 1 };
+//     if (filterValue) {
+//         return _authFetchJson(`/api/products?keyword=${filterValue}&page=${newPagination.current}`);
+//     } else if (supplier_ids) {
+//         const text = supplier_ids.join('|');
+//         return _authFetchJson(`/api/products?page=${newPagination.current}&supplier_ids=${text}&category_id=${category_id}`);
+//     }
+//     return _authFetchJson(`/api/products?page=${newPagination.current}&category_id=${category_id}`);
+// };

@@ -33,7 +33,7 @@ export default class App extends Component {
         const {token} = this.state
         return (
             <Provider store={store}>
-                {token ? <Home/> : <Login />}
+                {token ? <Home token={token}/> : <Login />}
             </Provider>
         )
     }

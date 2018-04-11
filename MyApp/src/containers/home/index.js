@@ -1,11 +1,94 @@
+// home页面
 import React, { Component } from 'react'
-import { Platform, StyleSheet, Text, View } from 'react-native'
 import { connect } from 'react-redux'
-import { HomeComponent } from '../../components/index'
+import { StackNavigator, TabNavigator, TabBarBottom } from 'react-navigation'
+import { Platform, StyleSheet, Text, View } from 'react-native'
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
+import { tokenLogin } from '../../actions/loginAction'
+import { fetchTickets } from '../../actions/ticketAction'
+import { MainScreen, ProfileScreen } from '../../components/index'
+import Ticket from '../ticket/index'
+
+const TabRouteConfigs = {  // 表示各个页面路由配置,让导航器知道需要导航的路由对应的页面
+    Home: {  // 路由名称
+        screen: Ticket,  // 对应的路由页面
+        navigationOptions: ({ navigation }) => ({
+            title: '首页',
+            tabBarIcon: ({ focused, tintColor }) => {
+                return <Icon name={focused ? 'home' : 'home-outline'} size={28} color={tintColor} />
+            }
+        }),
+    },
+    News: {
+        screen: ProfileScreen,
+        navigationOptions: {  // 指定路由页面的配置选项
+            title: '特产',  // 可用作头部标题 headerTitle ，或者Tab标题 tabBarLabel
+            tabBarIcon: ({ focused, tintColor }) => {
+                return <Icon name={focused ? 'mushroom' : 'mushroom-outline'} size={28} color={tintColor} />
+            },
+        },
+    },
+    Car: {
+        screen: MainScreen,
+        navigationOptions: {
+            title: '购物车',
+            tabBarIcon: ({ focused, tintColor }) => {
+                return <Icon name={focused ? 'cart' : 'cart-outline'} size={28} color={tintColor} />
+            }
+        }
+    },
+    My: {
+        screen: ProfileScreen,
+        navigationOptions: {
+            title: '我的',
+            tabBarIcon: ({ focused, tintColor }) => {
+                return <Icon name={focused ? 'account' : 'account-outline'} size={28} color={tintColor} />
+            }
+        },
+    }
+}
+
+const TabNavigatorConfigs = {
+    initialRouteName: 'Home',  // 初始显示的Tab对应的页面路由名称
+    tabBarComponent: TabBarBottom, // Tab选项卡组件，有 TabBarBottom 和 TabBarTop 两个值，在iOS中默认为 TabBarBottom ，在Android中默认为 TabBarTop 。
+    tabBarPosition: 'bottom', // 设置选项卡的位置，在顶部或是底部，有'top'与'bottom'可选
+    lazy: true,  // 是否懒加载页面
+    tabBarOptions: {
+        activeBackgroundColor: 'white',
+        activeTintColor: '#0F9C00',
+        inactiveBackgroundColor: 'white',
+        inactiveTintColor: 'grey',
+        showLabel: true,
+        showIcon: true,
+        indicatorStyle: { height: 0 },
+    } // 在属性TabBarBottom与TabBarTop中有所不同
+}
+
+const Tab = TabNavigator(TabRouteConfigs, TabNavigatorConfigs)
+const StackRouteConfigs = {
+    Tab: {
+        screen: Tab,
+    }
+}
+const StackNavigatorConfigs = {  // 表示导航器的配置，包括导航器的初始页面、各个页面之间导航的动画、页面的配置选项等等
+    initialRouteName: 'Tab',
+    navigationOptions: {
+        title: 'Welcome to learn React Native!',
+        headerStyle: { backgroundColor: '#5da8ff' },  // 设置导航头部样式
+        headerTitleStyle: { color: '#333333' },  // 设置导航头部标题样式
+    }
+}
+
+const HomeComponent = StackNavigator(StackRouteConfigs, StackNavigatorConfigs)
+
 
 class Home extends Component {
     constructor(props) {
         super(props)
+    }
+    componentDidMount() {
+        this.props.tokenLogin(this.props.token)
+        this.props.fetchTickets()
     }
     render() {
         return <HomeComponent/>
@@ -13,6 +96,11 @@ class Home extends Component {
 }
 
 export default connect(
-    state => ({}),
-    {}
+    state => ({
+        
+    }),
+    {
+        tokenLogin,
+        fetchTickets
+    }
 )(Home)
