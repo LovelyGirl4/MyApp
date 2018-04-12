@@ -9,6 +9,6 @@ export { default as HomeComponent} from './home/index'
 // ticket
 export { default as TicketComponent} from './ticket/index'
 // product
-export { default as ProductComponent} from './product/index'
-export { default as ProductDetail } from './product/ProductDetail'
+export { default as ProductListComponent} from './product/ProductList'
+export { default as ProductDetailComponent } from './product/ProductDetail'
 

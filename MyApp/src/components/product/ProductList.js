@@ -21,7 +21,7 @@ const data = [
     },
 ]
 
-class Product extends PureComponent {
+class ProductList extends PureComponent {
 
     constructor(props) {
         super(props)
@@ -224,7 +224,7 @@ class Product extends PureComponent {
 
 
 
-export default Product
+export default ProductList
 
 const styles = StyleSheet.create({
     headRow: {

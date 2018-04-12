@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { StackNavigator } from 'react-navigation'
 
-import { ProductDetail } from '../../components/index'
+import { ProductDetailComponent } from '../../components/index'
 import ProductList from './ProductList'
 
 // ProductDetail.navigationOptions = {
@@ -12,7 +12,7 @@ const ProductStack = StackNavigator(
     {
         ProductDetail: {
             path: 'product/:id',
-            screen: ProductDetail,
+            screen: ProductDetailComponent,
             navigationOptions: {
                 title: 'ProductDetail',
             }

@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Platform, StyleSheet, Text, View } from 'react-native'
 
-import { ProductComponent } from '../../components/index'
+import { ProductListComponent } from '../../components/index'
 import { fetchProducts } from '../../actions/productAction'
 
 
@@ -16,7 +16,7 @@ class ProductList extends Component {
     render() {
         const { products, pagination, fetchProducts, navigation } = this.props
         return <View>
-            <ProductComponent products={products} pagination={pagination} navigation={navigation}
+            <ProductListComponent products={products} pagination={pagination} navigation={navigation}
                 fetchProducts={fetchProducts} />
         </View>
     }

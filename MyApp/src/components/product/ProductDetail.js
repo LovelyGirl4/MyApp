@@ -3,12 +3,13 @@ import { View, Text, Image, StyleSheet } from 'react-native'
 import { Button, Flex, List, Modal, Tag } from 'antd-mobile'
 import noPicture from '../../asset/no_picture.gif'
 import { baseURL } from '../../common/index'
+import ProductModal from './ProductModal'
 
 class ProductDetail extends PureComponent {
     constructor(props) {
         super(props)
         this.state = {
-            showModal: false
+            showModal: false,
         }
     }
     _showModal = (e) => {
@@ -23,7 +24,8 @@ class ProductDetail extends PureComponent {
         })
     }
     render() {
-        const { name, id, images, product_id } = this.props.navigation.state.params.item
+        const { item } = this.props.navigation.state.params
+        const { name, id, images, product_id } = item
         const { showModal } = this.state
         const source = images.length > 0 ? { uri: baseURL(images[0].url) } : noPicture
 
@@ -39,34 +41,7 @@ class ProductDetail extends PureComponent {
                     <Button type="warning" inline onClick={this._showModal}>立即购买</Button>
                 </Flex.Item>
             </Flex>
-            <Modal
-                popup
-                visible={showModal}
-                closable
-                maskClosable
-                onClose={this._closeModal}
-                animationType="slide-up"
-            >
-                <View style={styles.modalView}>
-                    <Flex>
-                        <Flex.Item>
-                            <Image source={source} style={styles.miniImg} />
-                        </Flex.Item>
-                        <Flex.Item style={{flex: 2}}>
-                            <Text style={styles.price}>￥ 200</Text>
-                            <Text>库存200件</Text>
-                            <Text>请选择口味</Text>
-                        </Flex.Item>
-                    </Flex>
-                    <Text style={styles.tagTitle}>口味</Text>
-                    <Text style={styles.tagContainer}>
-                        {['不辣', '微辣', '香辣', '麻辣'].map((i, index) => (
-                            <Tag key={index}>{i}</Tag>
-                        ))}
-                    </Text>
-                    <Button type="warning" onClick={this._closeModal}>确定</Button>
-                </View>
-            </Modal>
+            <ProductModal item={item} showModal={showModal} _closeModal={this._closeModal}/>
         </View>
     }
 }
@@ -85,22 +60,5 @@ const styles = StyleSheet.create({
     price: {
         fontSize: 18,
         color: 'red'
-    },
-    modalView: {
-        marginLeft: 20,
-        marginRight: 20,
-    },
-    tagTitle: {
-        fontSize: 18,
-        marginTop: 20,
-    },
-    tagContainer: {
-        marginTop: 20,
-        marginBottom: 20,
-        fontSize: 16,
-        flexDirection: 'row',
-        flexWrap: 'wrap',
-        borderBottomWidth: 0.8,
-        borderColor: '#ccc'
     }
 })
