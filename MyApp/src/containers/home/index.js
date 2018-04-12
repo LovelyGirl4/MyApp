@@ -8,6 +8,7 @@ import { tokenLogin } from '../../actions/loginAction'
 import { fetchTickets } from '../../actions/ticketAction'
 import { MainScreen, ProfileScreen } from '../../components/index'
 import Ticket from '../ticket/index'
+import Product from '../product/index'
 
 const TabRouteConfigs = {  // 表示各个页面路由配置,让导航器知道需要导航的路由对应的页面
     Home: {  // 路由名称
@@ -20,7 +21,7 @@ const TabRouteConfigs = {  // 表示各个页面路由配置,让导航器知道�
         }),
     },
     News: {
-        screen: ProfileScreen,
+        screen: Product,
         navigationOptions: {  // 指定路由页面的配置选项
             title: '特产',  // 可用作头部标题 headerTitle ，或者Tab标题 tabBarLabel
             tabBarIcon: ({ focused, tintColor }) => {
@@ -70,17 +71,17 @@ const StackRouteConfigs = {
         screen: Tab,
     }
 }
-const StackNavigatorConfigs = {  // 表示导航器的配置，包括导航器的初始页面、各个页面之间导航的动画、页面的配置选项等等
-    initialRouteName: 'Tab',
-    navigationOptions: {
-        title: 'Welcome to learn React Native!',
-        headerStyle: { backgroundColor: '#5da8ff' },  // 设置导航头部样式
-        headerTitleStyle: { color: '#333333' },  // 设置导航头部标题样式
-    }
-}
+// const StackNavigatorConfigs = {  // 表示导航器的配置，包括导航器的初始页面、各个页面之间导航的动画、页面的配置选项等等
+//     initialRouteName: 'Tab',
+//     navigationOptions: {
+//         title: 'Welcome to learn React Native!',
+//         headerStyle: { backgroundColor: '#5da8ff' },  // 设置导航头部样式
+//         headerTitleStyle: { color: '#333333' },  // 设置导航头部标题样式
+//     }
+// }
 
-const HomeComponent = StackNavigator(StackRouteConfigs, StackNavigatorConfigs)
-
+// const HomeComponent = StackNavigator(StackRouteConfigs, StackNavigatorConfigs)
+const HomeComponent = StackNavigator(StackRouteConfigs)
 
 class Home extends Component {
     constructor(props) {

@@ -1,6 +1,7 @@
 import { fork, take } from 'redux-saga/effects'
 import loginSagas from './loginSagas'
 import ticketSagas from './ticketSagas'
+import productSagas from './productSagas'
 
 function createSagas(...args) {
     const sagas = []
@@ -12,5 +13,5 @@ function createSagas(...args) {
     return sagas
 }
 export default function* root() {
-    yield createSagas(loginSagas, ticketSagas)
+    yield createSagas(loginSagas, ticketSagas, productSagas)
 }

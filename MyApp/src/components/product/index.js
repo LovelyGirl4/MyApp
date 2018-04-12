@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react'
-import { FlatList, TouchableOpacity, Text, View, TextInput, StyleSheet, Image, CheckBox } from 'react-native'
+import { FlatList, TouchableOpacity, Text, View, TextInput, StyleSheet, Image } from 'react-native'
 import { Flex, WhiteSpace } from 'antd-mobile'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import noPicture from '../../asset/no_picture.gif'
@@ -21,13 +21,13 @@ const data = [
     },
 ]
 
-export default class FlatListBasic extends PureComponent {
+class Product extends PureComponent {
 
     constructor(props) {
         super(props)
         this.state = {
             sourceData: [],
-            refreshing: false, 
+            refreshing: false,
             indexText: '',
             check: false
         }
@@ -50,13 +50,13 @@ export default class FlatListBasic extends PureComponent {
         })
     }
     _keyExtractor = (item, index) => (item.id).toString()
-    _onPressItem = (id) => {
-        this.setState((state) => {
-            const selected = new Map(state.selected)
-            selected.set(id, !selected.get(id))
-            return { selected }
-        })
-
+    _onPressItem = (item) => {
+        // this.setState((state) => {
+        //     const selected = new Map(state.selected)
+        //     selected.set(id, !selected.get(id))
+        //     return { selected }
+        // })
+        this.props.navigation.navigate('ProductDetail', { id: item.id, item: item })
         // CustomToastAndroid.show(JSON.stringify(id), CustomToastAndroid.SHORT)
     };
 
@@ -80,25 +80,14 @@ export default class FlatListBasic extends PureComponent {
 
     // Header布局
     _renderHeader = () => {
-        const {check} = this.state
+        const { check } = this.state
         return <View>
             <Flex style={styles.headRow}>
                 <Flex.Item style={styles.headCol}>
-                    <Text style={styles.headText}>
-                    全部<Icon name='chevron-down'/>
-                    </Text>
+                    <Text style={styles.headText}>综合<Icon name='chevron-down' /></Text>
                 </Flex.Item>
                 <Flex.Item style={styles.headCol}>
-                    <Text style={styles.headText}>全城<Icon name='chevron-down' /></Text>
-                </Flex.Item>
-                <Flex.Item style={styles.headCol}>
-                    <Text style={styles.headText}>智能排序<Icon name='chevron-down' /></Text>
-                </Flex.Item>
-                <Flex.Item style={styles.headColLast}>
-                    <Text onPress={this._changeCheck} style={styles.headText}>
-                        <Icon name={check ? 'checkbox-marked' : 'checkbox-blank-outline'} color={check ? '#5da8ff' : 'grey'} size={16}/>
-                        随买随用
-                    </Text>
+                    <Text style={styles.headText}>销量</Text>
                 </Flex.Item>
             </Flex>
         </View>
@@ -150,6 +139,10 @@ export default class FlatListBasic extends PureComponent {
 
     // 上拉加载更多
     _onEndReached = () => {
+        const { current_page, total_page } = this.props.pagination
+        if (current_page !== total_page) {
+            this.props.fetchProducts({current_page: current_page + 1})
+        }
         // let newData = []
 
         // for (let i = 20; i < 300; i++) {
@@ -168,24 +161,24 @@ export default class FlatListBasic extends PureComponent {
     };
 
     _renderItem = ({ item }) => {
-        const {name, id, images} = item
-        const source = images.length > 0 ? {uri: baseURL(images[0].url)} : noPicture
+        const { name, id, images, product_id } = item
+        const source = images.length > 0 ? { uri: baseURL(images[0].url) } : noPicture
         return (
             <TouchableOpacity
                 id={id}
                 activeOpacity={0.8}
                 // selected={!!this.state.selected.get(item.id)}
-                onPress={this._onPressItem}
+                onPress={() => this._onPressItem(item)}
                 style={styles.grid}
             >
                 <Flex>
                     <Flex.Item>
-                        <Image source={source} style={styles.img}/>
+                        <Image source={source} style={styles.img} />
                     </Flex.Item>
-                    <Flex.Item style={{flex: 3}}>
+                    <Flex.Item style={{ flex: 3 }}>
                         <Text style={styles.title}>{name}</Text>
-                        <Text style={styles.comment}>很好, 4.8分 | 150000+人消费</Text>
-                        <Text style={styles.price}>￥20起</Text>
+                        <Text style={styles.price}>￥200</Text>
+                        <Text>100人付款</Text>
                     </Flex.Item>
                 </Flex>
             </TouchableOpacity>
@@ -200,10 +193,10 @@ export default class FlatListBasic extends PureComponent {
     };
 
     render() {
-        const {check} = this.state
-        const {tickets} = this.props
-        const data = tickets && tickets.map((t, index) => {
-            return {...t, key: index}
+        const { check } = this.state
+        const { products, pagination } = this.props
+        const data = products && products.map((t, index) => {
+            return { ...t, key: index }
         })
         return (
             <FlatList
@@ -223,11 +216,15 @@ export default class FlatListBasic extends PureComponent {
                 refreshing={this.state.refreshing}
                 onRefresh={this._renderRefresh}
                 // 是一个可选的优化，用于避免动态测量内容；+50是加上Header的高度
-                getItemLayout={(data, index) => ({ length: 40, offset: (40 + 1) * Number(index + 50), index})}
+                getItemLayout={(data, index) => ({ length: 40, offset: (40 + 1) * Number(index + 50), index })}
             />
         )
     }
 }
+
+
+
+export default Product
 
 const styles = StyleSheet.create({
     headRow: {

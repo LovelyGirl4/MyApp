@@ -52,8 +52,8 @@ export const doLogin = (username, password) => {
         })
     })
 }
-export const fetchTickets = (pagination = {current: 1}) => {
-    return _authedFetch(`/api/products?page=${pagination.current}`)
+export const fetchTickets = (pagination = { current_page: 1 }) => {
+    return _authedFetch(`/api/products?page=${pagination.current_page}`)
 }
 // export const fetchProductList = (pagination, supplier_ids, category_id, filterValue) => {
 //     const newPagination = pagination ? pagination : { current: 1 };
