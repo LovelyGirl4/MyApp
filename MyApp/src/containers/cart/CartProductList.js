@@ -22,7 +22,7 @@ class CartProductList extends Component {
 
 export default connect(
     ({ cart }) => ({
-        cartProducts: cart.cartProducts
+        cartProducts: cart.data.cartProducts
     }),
     { fetchCartProducts }
 )(CartProductList)

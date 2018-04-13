@@ -22,7 +22,7 @@ class Profile extends Component {
 
 export default connect(
     ({ my }) => ({
-        profile: my.profile
+        profile: my.data.profile
     }),
     { fetchMyProfile }
 )(Profile)

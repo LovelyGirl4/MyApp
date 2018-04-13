@@ -24,7 +24,7 @@ const _fetchJson = (url, option = {}) => {
 }
 const _authedFetch = (url, option = {}) => {
     // token: 1.从store里取 2.从缓存里取
-    const access_token = store.getState().login.accessToken
+    const access_token = store.getState().login.data.accessToken
     return _fetch(url, {
         ...option,
         headers: {
@@ -56,12 +56,12 @@ export const fetchTickets = (pagination = { current_page: 1 }) => {
     return _authedFetch(`/api/products?page=${pagination.current_page}`)
 }
 export const fetchCartProducts = () => {
-    const userID = store.getState().login.userID
+    const userID = store.getState().login.data.userID
     return _authedFetch(`/api/users/${userID}/inquiries?type=draft&page=1&page_size=9999&&order_by=updated_at|desc`)
 }
 
 export const addProductToCart = (id) => {
-    const userID = store.getState().login.userID
+    const userID = store.getState().login.data.userID
     return _authedFetch(`/api/users/${userID}/inquiries`, {
         method: 'POST',
         headers: {
@@ -76,6 +76,6 @@ export const addProductToCart = (id) => {
 }
 
 export const fetchMyProfile = () => {
-    const userID = store.getState().login.userID
+    const userID = store.getState().login.data.userID
     return _authedFetch('/api/users/' + userID)
 }

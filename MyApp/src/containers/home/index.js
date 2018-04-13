@@ -53,7 +53,7 @@ const TabRouteConfigs = {  // 表示各个页面路由配置,让导航器知道�
         },
     }
 }
-
+// Tab
 const TabNavigatorConfigs = {
     initialRouteName: 'Home',  // 初始显示的Tab对应的页面路由名称
     tabBarComponent: TabBarBottom, // Tab选项卡组件，有 TabBarBottom 和 TabBarTop 两个值，在iOS中默认为 TabBarBottom ，在Android中默认为 TabBarTop 。
@@ -71,6 +71,7 @@ const TabNavigatorConfigs = {
 }
 
 const Tab = TabNavigator(TabRouteConfigs, TabNavigatorConfigs)
+// Stack
 const StackRouteConfigs = {
     Tab: {
         screen: Tab,

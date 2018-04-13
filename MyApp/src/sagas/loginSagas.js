@@ -8,7 +8,7 @@ function* doLoginFunc(username, password) {
         yield put({ type: DO_LOGIN, fetching: true })
         const { access_token } = yield call(doLogin, username, password)
         // 将token存进localStorage
-        yield call(saveStorage, 'accessToken', '001', access_token)
+        yield call(saveStorage, 'accessToken', '001', access_token, 1000 * 3600 * 24)
         yield put({ type: DO_LOGIN_SUCCESS, accessToken: access_token })
     } catch (e) {
         console.log('eeeee:', e)

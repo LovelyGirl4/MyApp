@@ -26,7 +26,6 @@ export default class App extends Component {
             this.setState({
                 token: undefined
             })
-            console.warn(err.message)
         })
     }
     render() {

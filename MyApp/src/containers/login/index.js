@@ -8,6 +8,12 @@ class Login extends Component {
     constructor(props) {
         super(props)
     }
+    componentWillReceiveProps(nextProps) {
+        const { assessToken } = nextProps
+        if (assessToken && nextProps.navigation) {
+            nextProps.navigation.navigate('Tab')
+        }
+    }
     render() {
         const { doLogin } = this.props
         return <View>
@@ -17,6 +23,8 @@ class Login extends Component {
 }
 
 export default connect(
-    state => ({}),
+    ({login}) => ({
+        assessToken: login.data.accessToken
+    }),
     { doLogin }
 )(Login)

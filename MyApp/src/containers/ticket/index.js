@@ -22,7 +22,7 @@ class Ticket extends Component {
 
 export default connect(
     ({ticket}) => ({
-        tickets: ticket.tickets.products
+        tickets: ticket.data.tickets.products
     }),
     { fetchTickets }
 )(Ticket)

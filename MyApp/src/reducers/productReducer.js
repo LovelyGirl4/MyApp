@@ -1,4 +1,6 @@
-import { FETCH_PRODUCTS_SUCCESS } from '../constants/ActionTypes'
+import { combineReducers } from 'redux'
+import { FETCH_PRODUCTS, FETCH_PRODUCTS_SUCCESS } from '../constants/ActionTypes'
+import { createAsyncUIReducer } from '../common/index'
 
 const initialState = {
     products: {
@@ -13,7 +15,7 @@ const calcProducts = (oldData, data) => {
     }
 }
 
-const ticketReducer = (state = initialState, action) => {
+const data = (state = initialState, action) => {
     switch (action.type) {
     case FETCH_PRODUCTS_SUCCESS:
         return { ...state, products: calcProducts(state.products, action.products) }
@@ -22,4 +24,11 @@ const ticketReducer = (state = initialState, action) => {
     }
 }
 
-export default ticketReducer
+const ui = createAsyncUIReducer({
+    fetchProductsUI: FETCH_PRODUCTS,
+})
+
+export default combineReducers({
+    data,
+    ui
+})

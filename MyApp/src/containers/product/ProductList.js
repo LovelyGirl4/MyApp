@@ -24,11 +24,11 @@ class ProductList extends Component {
 
 export default connect(
     ({ product }) => ({
-        products: product.products.products,
+        products: product.data.products.products,
         pagination: {
-            current_page: product.products.current_page,
-            total_page: product.products.total_page,
-            total_count: product.products.total_count
+            current_page: product.data.products.current_page,
+            total_page: product.data.products.total_page,
+            total_count: product.data.products.total_count
         }
     }),
     {

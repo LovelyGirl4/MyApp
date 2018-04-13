@@ -1,10 +1,12 @@
-import { FETCH_CART_PRODUCTS_SUCCESS } from '../constants/ActionTypes'
+import { combineReducers } from 'redux'
+import { FETCH_CART_PRODUCTS, FETCH_CART_PRODUCTS_SUCCESS } from '../constants/ActionTypes'
+import { createAsyncUIReducer } from '../common/index'
 
 const initialState = {
     cartProducts: []
 }
 
-const cartReducer = (state = initialState, action) => {
+const data = (state = initialState, action) => {
     switch (action.type) {
     case FETCH_CART_PRODUCTS_SUCCESS:
         return { ...state, cartProducts: action.products }
@@ -13,4 +15,11 @@ const cartReducer = (state = initialState, action) => {
     }
 }
 
-export default cartReducer
+const ui = createAsyncUIReducer({
+    fetchCartProductsUI: FETCH_CART_PRODUCTS
+})
+
+export default combineReducers({
+    data,
+    ui
+})
