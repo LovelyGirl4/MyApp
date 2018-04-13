@@ -16,7 +16,7 @@ export default {
     watchFetchTickets: function* () {
         while (true) {
             const { pagination } = yield take(ActionTypes.FETCH_TICKETS)
-            const token = yield call(fetchTicketsFunc, pagination)
+            yield call(fetchTicketsFunc, pagination)
         }
     },
 }

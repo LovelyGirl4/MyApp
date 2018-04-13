@@ -1,24 +1,24 @@
 import React, { Component } from 'react'
 import { StackNavigator } from 'react-navigation'
 
-import ProductList from './ProductList'
-import ProductDetail from './ProductDetail'
+import { ProductDetailComponent } from '../../components/index'
+import CartProductList from './CartProductList'
 
 // ProductDetail.navigationOptions = {
 //     title: 'ProductDetail'
 // }
 
-const ProductStack = StackNavigator(
+const CartProductStack = StackNavigator(
     {
         ProductDetail: {
             path: 'product/:id',
-            screen: ProductDetail,
+            screen: ProductDetailComponent,
             navigationOptions: {
                 title: 'ProductDetail',
             }
         },
         ProductList: {
-            screen: ProductList,
+            screen: CartProductList,
             navigationOptions: {
                 header: null
             }
@@ -29,4 +29,4 @@ const ProductStack = StackNavigator(
     }
 )
 
-export default ProductStack
+export default CartProductStack

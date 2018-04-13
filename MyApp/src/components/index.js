@@ -11,4 +11,6 @@ export { default as TicketComponent} from './ticket/index'
 // product
 export { default as ProductListComponent} from './product/ProductList'
 export { default as ProductDetailComponent } from './product/ProductDetail'
+// cart
+export { default as CartProductListComponent} from './cart/ProductList'
 

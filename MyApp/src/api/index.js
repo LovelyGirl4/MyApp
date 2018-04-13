@@ -55,13 +55,22 @@ export const doLogin = (username, password) => {
 export const fetchTickets = (pagination = { current_page: 1 }) => {
     return _authedFetch(`/api/products?page=${pagination.current_page}`)
 }
-// export const fetchProductList = (pagination, supplier_ids, category_id, filterValue) => {
-//     const newPagination = pagination ? pagination : { current: 1 };
-//     if (filterValue) {
-//         return _authFetchJson(`/api/products?keyword=${filterValue}&page=${newPagination.current}`);
-//     } else if (supplier_ids) {
-//         const text = supplier_ids.join('|');
-//         return _authFetchJson(`/api/products?page=${newPagination.current}&supplier_ids=${text}&category_id=${category_id}`);
-//     }
-//     return _authFetchJson(`/api/products?page=${newPagination.current}&category_id=${category_id}`);
-// };
+export const fetchCartProducts = () => {
+    const userID = store.getState().login.userID
+    return _authedFetch(`/api/users/${userID}/inquiries?type=draft&page=1&page_size=9999&&order_by=updated_at|desc`)
+}
+
+export const addProductToCart = (id) => {
+    const userID = store.getState().login.userID
+    return _authedFetch(`/api/users/${userID}/inquiries`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        body: JSON.stringify({
+            product_id: id,
+            quantity: 1,
+            unit: 'PCS',
+        })
+    })
+}

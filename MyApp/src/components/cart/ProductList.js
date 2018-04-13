@@ -6,7 +6,6 @@ import noPicture from '../../asset/no_picture.gif'
 import { baseURL } from '../../common/index'
 // import CustomToastAndroid from '../../../js/ToastAndroid'
 
-
 class ProductList extends PureComponent {
 
     constructor(props) {
@@ -77,41 +76,22 @@ class ProductList extends PureComponent {
                 </Flex.Item>
             </Flex>
         </View>
-        // <View style={{ flexDirection: 'row' }}>
-        //     <TextInput
-        //         style={{ height: 50, flex: 1 }}
-        //         placeholder='请输入行号'
-        //         onChangeText={(text) => { this.setState({ indexText: text }) }}
-        //     />
-        //     <TouchableOpacity
-        //         onPress={this._doActionToItem}
-        //         style={{ height: 50, width: 90, backgroundColor: 'green', justifyContent: 'center', alignItems: 'center' }}
-        //     >
-        //         <Text style={{ color: '#fff' }}>跳转到指定行</Text>
-        //     </TouchableOpacity>
-        //     <TouchableOpacity
-        //         onPress={this._doActionToBottom}
-        //         style={{ height: 50, width: 90, backgroundColor: 'red', justifyContent: 'center', alignItems: 'center' }}
-        //     >
-        //         <Text style={{ color: '#fff' }}>跳转到底部</Text>
-        //     </TouchableOpacity>
-        // </View>
-    };
+    }
 
     // Footer布局
     _renderFooter = () => (
         <View><Text>Footer</Text></View>
-    );
+    )
 
     // 自定义分割线
     _renderItemSeparatorComponent = ({ highlighted }) => (
         <View style={styles.splitLine}></View>
-    );
+    )
 
     // 空布局
     _renderEmptyView = () => (
         <View><Text>EmptyView</Text></View>
-    );
+    )
 
     // 下拉刷新
     _renderRefresh = () => {
@@ -121,33 +101,18 @@ class ProductList extends PureComponent {
             // CustomToastAndroid.show('没有可刷新的内容！', CustomToastAndroid.SHORT)
             this.setState({ refreshing: false })
         }, 3000)
-    };
+    }
 
     // 上拉加载更多
-    _onEndReached = () => {
-        const { current_page, total_page } = this.props.pagination
-        if (current_page !== total_page) {
-            this.props.fetchProducts({current_page: current_page + 1})
-        }
-        // let newData = []
-
-        // for (let i = 20; i < 300; i++) {
-        //     let obj = {
-        //         id: i,
-        //         title: i + '生了只小柯基'
-        //     }
-
-        //     newData.push(obj)
-        // }
-
-        // this.dataContainer = this.dataContainer.concat(newData)
-        // this.setState({
-        //     sourceData: this.dataContainer
-        // })
-    };
+    // _onEndReached = () => {
+    //     const { current_page, total_page } = this.props.pagination
+    //     if (current_page !== total_page) {
+    //         this.props.fetchProducts({ current_page: current_page + 1 })
+    //     }
+    // }
 
     _renderItem = ({ item }) => {
-        const { name, id, images, product_id } = item
+        const { name, id, images, product_id, count } = item
         const source = images.length > 0 ? { uri: baseURL(images[0].url) } : noPicture
         return (
             <TouchableOpacity
@@ -164,7 +129,7 @@ class ProductList extends PureComponent {
                     <Flex.Item style={{ flex: 3 }}>
                         <Text style={styles.title}>{name}</Text>
                         <Text style={styles.price}>￥200</Text>
-                        <Text>100人付款</Text>
+                        <Text>数量: {count}</Text>
                     </Flex.Item>
                 </Flex>
             </TouchableOpacity>
@@ -180,8 +145,8 @@ class ProductList extends PureComponent {
 
     render() {
         const { check } = this.state
-        const { products, pagination } = this.props
-        const data = products && products.map((t, index) => {
+        const { cartProducts } = this.props
+        const data = cartProducts && cartProducts.map((t, index) => {
             return { ...t, key: index }
         })
         return (
@@ -194,7 +159,7 @@ class ProductList extends PureComponent {
                 // 决定当距离内容最底部还有多远时触发onEndReached回调；数值范围0~1，例如：0.5表示可见布局的最底端距离content最底端等于可见布局一半高度的时候调用该回调
                 onEndReachedThreshold={0.1}
                 // 当列表被滚动到距离内容最底部不足onEndReacchedThreshold设置的距离时调用
-                onEndReached={this._onEndReached}
+                // onEndReached={this._onEndReached}
                 ListHeaderComponent={this._renderHeader}
                 ListFooterComponent={this._renderFooter}
                 ItemSeparatorComponent={this._renderItemSeparatorComponent}

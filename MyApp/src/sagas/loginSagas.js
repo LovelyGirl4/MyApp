@@ -28,7 +28,7 @@ export default {
     watchLogin: function* () {
         while (true) {
             const { username, password } = yield take(DO_LOGIN)
-            const token = yield call(doLoginFunc, username, password)
+            yield call(doLoginFunc, username, password)
         }
     },
     watchTokenLogin: function* () {

@@ -25,8 +25,8 @@ class ProductModal extends PureComponent {
         })
     }
     render() {
-        const { item, showModal, _closeModal } = this.props
-        const { name, id, images, product_id } = item
+        const { item, showModal, _closeModal, _sure } = this.props
+        const { name, id, images } = item
         const {number} = this.state
         const source = images.length > 0 ? { uri: baseURL(images[0].url) } : noPicture
         return (<Modal
@@ -79,7 +79,7 @@ class ProductModal extends PureComponent {
                         </Flex.Item>
                     </Flex>
                 </View>
-                <Button type="warning" onClick={_closeModal} style={styles.button}>确定</Button>
+                <Button type="warning" onClick={() => _sure(id)} style={styles.button}>确定</Button>
             </View>
         </Modal>)
     }

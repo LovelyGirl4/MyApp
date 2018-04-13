@@ -23,6 +23,12 @@ class ProductDetail extends PureComponent {
             showModal: false
         })
     }
+    _sure = (id) => {
+        this.setState({
+            showModal: false
+        })
+        this.props.addProductToCart(id)
+    }
     render() {
         const { item } = this.props.navigation.state.params
         const { name, id, images, product_id } = item
@@ -41,7 +47,7 @@ class ProductDetail extends PureComponent {
                     <Button type="warning" inline onClick={this._showModal}>立即购买</Button>
                 </Flex.Item>
             </Flex>
-            <ProductModal item={item} showModal={showModal} _closeModal={this._closeModal}/>
+            <ProductModal item={item} showModal={showModal} _closeModal={this._closeModal} _sure={this._sure}/>
         </View>
     }
 }

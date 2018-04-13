@@ -9,6 +9,7 @@ import { fetchTickets } from '../../actions/ticketAction'
 import { MainScreen, ProfileScreen } from '../../components/index'
 import Ticket from '../ticket/index'
 import Product from '../product/index'
+import Cart from '../cart/index'
 
 const TabRouteConfigs = {  // 表示各个页面路由配置,让导航器知道需要导航的路由对应的页面
     Home: {  // 路由名称
@@ -20,7 +21,7 @@ const TabRouteConfigs = {  // 表示各个页面路由配置,让导航器知道�
             }
         }),
     },
-    News: {
+    Product: {
         screen: Product,
         navigationOptions: {  // 指定路由页面的配置选项
             title: '特产',  // 可用作头部标题 headerTitle ，或者Tab标题 tabBarLabel
@@ -29,8 +30,8 @@ const TabRouteConfigs = {  // 表示各个页面路由配置,让导航器知道�
             },
         },
     },
-    Car: {
-        screen: MainScreen,
+    Cart: {
+        screen: Cart,
         navigationOptions: {
             title: '购物车',
             tabBarIcon: ({ focused, tintColor }) => {
