@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react'
 import { View, Text, Image, StyleSheet } from 'react-native'
-import { Button, Flex, List, Modal, Tag } from 'antd-mobile'
+import { Button, Flex, List, Modal, Tag, Stepper } from 'antd-mobile'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import noPicture from '../../asset/no_picture.gif'
 import { baseURL } from '../../common/index'
@@ -12,16 +12,9 @@ class ProductModal extends PureComponent {
             number: 1
         }
     }
-    _minusNumber = () => {
-        const { number } = this.state
+    _changeNumber = (val) => {
         this.setState({
-            number: number === 1 ? 1 : number - 1
-        })
-    }
-    _plusNumber = () => {
-        const { number } = this.state
-        this.setState({
-            number: number + 1
+            number: val
         })
     }
     render() {
@@ -56,28 +49,19 @@ class ProductModal extends PureComponent {
                         ))}
                     </Text>
                 </View>
-                <View style={styles.iconView}>
-                    <Flex>
-                        <Flex.Item>
-                            <View style={styles.centerView}>
-                                <Text style={styles.tagTitle}>购买数量</Text>
-                            </View>
-                        </Flex.Item>
-                        <Flex.Item>
-                            <Text style={styles.iconContainer}>
-                                <Text onPress={this._minusNumber}>
-                                    <Icon name='minus-box' size={40} color='#CCC' />
-                                </Text>
-                                {/*<View style={styles.numberView}>
-                                    <Text>{number}</Text>
-                                </View>*/}
-                                <Text>{number}</Text>
-                                <Text onPress={this._plusNumber}>
-                                    <Icon name='plus-box' size={40} color='#CCC' />
-                                </Text>
-                            </Text>
-                        </Flex.Item>
-                    </Flex>
+                <View style={styles.stepperView}>
+                    <View style={styles.buyView}>
+                        <Text style={styles.buy}>购买数量</Text>
+                    </View>
+                    <View style={styles.numberView}>
+                        <Stepper
+                            style={{ width: 120 }}
+                            max={100}
+                            min={1}
+                            value={number}
+                            onChange={this._changeNumber}
+                        />
+                    </View>
                 </View>
                 <Button type="warning" onClick={() => _sure(id)} style={styles.button}>确定</Button>
             </View>
@@ -104,13 +88,6 @@ const styles = StyleSheet.create({
         borderColor: '#ccc',
         // height: 80
     },
-    iconView: {
-        borderBottomWidth: 0.6,
-        borderColor: '#ccc',
-        // height: 55,
-        marginTop: 10,
-        justifyContent: 'center',
-    },
     tagTitle: {
         fontSize: 20,
         marginTop: 20,
@@ -123,19 +100,26 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         flexWrap: 'wrap'
     },
-    iconContainer: {
-        textAlign: 'right'
-    },
-    numberView: {
-        height: 40,
-        width: 35,
+    stepperView: {
+        flex: 2,
+        flexDirection: 'row',
+        borderBottomWidth: 0.6,
+        borderColor: '#ccc',
+        // height: 55,
+        marginTop: 10,
         justifyContent: 'center',
-        alignItems: 'center'
     },
-    centerView: {
+    buyView: {
+        flex: 1,
         height: 50,
         justifyContent: 'center',
-        marginBottom: 10
+    },
+    buy: {
+        fontSize: 20,
+    },
+    numberView: {
+        flex: 1,
+        alignItems: 'flex-end'
     },
     button: {
         marginTop: 10,

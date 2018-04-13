@@ -74,3 +74,8 @@ export const addProductToCart = (id) => {
         })
     })
 }
+
+export const fetchMyProfile = () => {
+    const userID = store.getState().login.userID
+    return _authedFetch('/api/users/' + userID)
+}

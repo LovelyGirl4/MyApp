@@ -4,10 +4,11 @@ import login from './loginReducer'
 import ticket from './ticketReducer'
 import product from './productReducer'
 import cart from './cartReducer'
+import my from './myReducer'
 
-const initialState = {
-    token: ''
-}
+// const initialState = {
+//     token: ''
+// }
 
 // const app = (state = initialState, a) => {
 //     let nextState = {}
@@ -26,5 +27,6 @@ export default combineReducers({
     login,
     ticket,
     product,
-    cart
+    cart,
+    my
 })

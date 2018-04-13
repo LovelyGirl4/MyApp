@@ -20,7 +20,7 @@ const ProductStack = StackNavigator(
         ProductList: {
             screen: ProductList,
             navigationOptions: {
-                header: null
+                title: '特产'
             }
         },
     },

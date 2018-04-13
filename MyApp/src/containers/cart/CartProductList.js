@@ -12,9 +12,10 @@ class CartProductList extends Component {
         this.props.fetchCartProducts()
     }
     render() {
-        const { cartProducts, navigation } = this.props
+        const { cartProducts, navigation, fetchCartProducts } = this.props
         return <View>
-            <CartProductListComponent cartProducts={cartProducts} navigation={navigation}/>
+            <CartProductListComponent cartProducts={cartProducts} navigation={navigation}
+                fetchCartProducts={fetchCartProducts}/>
         </View>
     }
 }

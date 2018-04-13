@@ -43,7 +43,9 @@ class Login extends Component {
                     placeholder="186 1234 1234"
                     // value={username}
                     onChange={this.handleUsernameChange}
-                ><Icon username="account-outline" size={28} color="#4F8EF7" /></InputItem>
+                >
+                    <Icon name="account-outline" size={28} color="#4F8EF7" />
+                </InputItem>
                 <InputItem
                     style={styles.input}
                     {...getFieldProps('password')}
@@ -51,7 +53,9 @@ class Login extends Component {
                     placeholder="****"
                     // value={password}
                     onChange={this.handlePasswordChange}
-                ><Icon username="key" size={26} color="#4F8EF7" /></InputItem>
+                >
+                    <Icon name="key" size={26} color="#4F8EF7" />
+                </InputItem>
                 <Flex>
                     <Flex.Item>
                         <CheckboxItem style={styles.checkbox}>

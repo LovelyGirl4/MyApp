@@ -1,7 +1,7 @@
 import { FETCH_TICKETS_SUCCESS } from '../constants/ActionTypes'
 
 const initialState = {
-    tickets: ''
+    tickets: {}
 }
 
 const ticketReducer = (state = initialState, action) => {

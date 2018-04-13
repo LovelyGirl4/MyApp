@@ -1,48 +1,35 @@
 import React, { PureComponent } from 'react'
 import { FlatList, TouchableOpacity, Text, View, TextInput, StyleSheet, Image } from 'react-native'
-import { Flex, WhiteSpace } from 'antd-mobile'
+import { Flex, WhiteSpace, Checkbox, Tag } from 'antd-mobile'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import noPicture from '../../asset/no_picture.gif'
 import { baseURL } from '../../common/index'
+import ProductNumber from './ProductNumber'
 // import CustomToastAndroid from '../../../js/ToastAndroid'
+
+const CheckboxItem = Checkbox.CheckboxItem
 
 class ProductList extends PureComponent {
 
     constructor(props) {
         super(props)
         this.state = {
-            sourceData: [],
             refreshing: false,
             indexText: '',
-            check: false
+            check: false,
         }
         this.dataContainer = []
     }
 
     componentDidMount() {
-        // 初始化数据
-        // for (let i = 0; i < 20; i++) {
-        //     let obj = {
-        //         id: i,
-        //         title: i + '只柯基'
-        //     }
-
-        //     this.dataContainer.push(obj)
-        // }
-
         this.setState({
             sourceData: this.dataContainer
         })
     }
     _keyExtractor = (item, index) => (item.id).toString()
     _onPressItem = (item) => {
-        // this.setState((state) => {
-        //     const selected = new Map(state.selected)
-        //     selected.set(id, !selected.get(id))
-        //     return { selected }
-        // })
+        // 跳回产品详情页
         this.props.navigation.navigate('ProductDetail', { id: item.id, item: item })
-        // CustomToastAndroid.show(JSON.stringify(id), CustomToastAndroid.SHORT)
     };
 
     // 跳转到指定位置
@@ -65,17 +52,7 @@ class ProductList extends PureComponent {
 
     // Header布局
     _renderHeader = () => {
-        const { check } = this.state
-        return <View>
-            <Flex style={styles.headRow}>
-                <Flex.Item style={styles.headCol}>
-                    <Text style={styles.headText}>综合<Icon name='chevron-down' /></Text>
-                </Flex.Item>
-                <Flex.Item style={styles.headCol}>
-                    <Text style={styles.headText}>销量</Text>
-                </Flex.Item>
-            </Flex>
-        </View>
+        return null
     }
 
     // Footer布局
@@ -96,6 +73,7 @@ class ProductList extends PureComponent {
     // 下拉刷新
     _renderRefresh = () => {
         this.setState({ refreshing: true })//开始刷新
+        this.props.fetchCartProducts()
         //这里模拟请求网络，拿到数据，3s后停止刷新
         setTimeout(() => {
             // CustomToastAndroid.show('没有可刷新的内容！', CustomToastAndroid.SHORT)
@@ -111,35 +89,36 @@ class ProductList extends PureComponent {
     //     }
     // }
 
+    // FlatList item
     _renderItem = ({ item }) => {
         const { name, id, images, product_id, count } = item
         const source = images.length > 0 ? { uri: baseURL(images[0].url) } : noPicture
         return (
-            <TouchableOpacity
-                id={id}
-                activeOpacity={0.8}
-                // selected={!!this.state.selected.get(item.id)}
-                onPress={() => this._onPressItem(item)}
-                style={styles.grid}
-            >
-                <Flex>
+            <CheckboxItem>
+                <Flex style={styles.grid}>
                     <Flex.Item>
-                        <Image source={source} style={styles.img} />
+                        <TouchableOpacity
+                            id={id}
+                            activeOpacity={0.8}
+                            onPress={() => this._onPressItem(item)}
+                        >
+                            <Image source={source} style={styles.img} />
+                        </TouchableOpacity>
                     </Flex.Item>
                     <Flex.Item style={{ flex: 3 }}>
-                        <Text style={styles.title}>{name}</Text>
-                        <Text style={styles.price}>￥200</Text>
-                        <Text>数量: {count}</Text>
+                        <Text style={styles.title} onPress={() => this._onPressItem(item)}>{name}</Text>
+                        <Tag selected>香辣</Tag>
+                        <Flex>
+                            <Flex.Item>
+                                <Text style={styles.price}>￥200</Text>
+                            </Flex.Item>
+                            <Flex.Item>
+                                <ProductNumber count={count} />
+                            </Flex.Item>
+                        </Flex>
                     </Flex.Item>
                 </Flex>
-            </TouchableOpacity>
-            // <Text>{item.title}</Text>
-            // <FlatListItem
-            //     id={item.id}
-            //     onPressItem={this._onPressItem}
-            //     selected={!!this.state.selected.get(item.id)}
-            //     title={item.title}
-            // />
+            </CheckboxItem>
         )
     };
 
@@ -162,7 +141,7 @@ class ProductList extends PureComponent {
                 // onEndReached={this._onEndReached}
                 ListHeaderComponent={this._renderHeader}
                 ListFooterComponent={this._renderFooter}
-                ItemSeparatorComponent={this._renderItemSeparatorComponent}
+                ItemSeparatorComponent={this._renderItemSeparatorComponent} // 自定义分割线
                 ListEmptyComponent={this._renderEmptyView}
                 refreshing={this.state.refreshing}
                 onRefresh={this._renderRefresh}
@@ -203,14 +182,14 @@ const styles = StyleSheet.create({
     },
     splitLine: {
         height: 0.8,
-        backgroundColor: '#ddd',
-        marginLeft: 20,
-        marginRight: 20
+        backgroundColor: '#fff',
+        marginLeft: 15,
+        marginRight: 15
     },
     grid: {
         height: 100,
-        marginLeft: 20,
-        marginRight: 20
+        marginLeft: 15,
+        marginRight: 15
         // justifyContent: 'center',
         // alignItems: 'center'
     },
@@ -220,8 +199,8 @@ const styles = StyleSheet.create({
         marginTop: 10,
     },
     title: {
-        fontSize: 20,
-        justifyContent: 'flex-start'
+        fontSize: 16,
+        // justifyContent: 'flex-start'
     },
     comment: {
         color: '#5da8ff'
