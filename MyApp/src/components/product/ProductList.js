@@ -4,6 +4,8 @@ import { Flex, WhiteSpace } from 'antd-mobile'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import noPicture from '../../asset/no_picture.gif'
 import { baseURL } from '../../common/index'
+import Loading from '../loading/Loading'
+import { debonceFn } from '../../common/index'
 // import CustomToastAndroid from '../../../js/ToastAndroid'
 
 
@@ -21,16 +23,6 @@ class ProductList extends PureComponent {
     }
 
     componentDidMount() {
-        // 初始化数据
-        // for (let i = 0; i < 20; i++) {
-        //     let obj = {
-        //         id: i,
-        //         title: i + '只柯基'
-        //     }
-
-        //     this.dataContainer.push(obj)
-        // }
-
         this.setState({
             sourceData: this.dataContainer
         })
@@ -127,23 +119,8 @@ class ProductList extends PureComponent {
     _onEndReached = () => {
         const { current_page, total_page } = this.props.pagination
         if (current_page !== total_page) {
-            this.props.fetchProducts({current_page: current_page + 1})
+            this.props.fetchProducts({ current_page: current_page + 1 })
         }
-        // let newData = []
-
-        // for (let i = 20; i < 300; i++) {
-        //     let obj = {
-        //         id: i,
-        //         title: i + '生了只小柯基'
-        //     }
-
-        //     newData.push(obj)
-        // }
-
-        // this.dataContainer = this.dataContainer.concat(newData)
-        // this.setState({
-        //     sourceData: this.dataContainer
-        // })
     };
 
     _renderItem = ({ item }) => {
@@ -168,42 +145,38 @@ class ProductList extends PureComponent {
                     </Flex.Item>
                 </Flex>
             </TouchableOpacity>
-            // <Text>{item.title}</Text>
-            // <FlatListItem
-            //     id={item.id}
-            //     onPressItem={this._onPressItem}
-            //     selected={!!this.state.selected.get(item.id)}
-            //     title={item.title}
-            // />
         )
     };
 
     render() {
         const { check } = this.state
-        const { products, pagination } = this.props
+        const { products, pagination, fetchProductsUI } = this.props
         const data = products && products.map((t, index) => {
             return { ...t, key: index }
         })
         return (
-            <FlatList
-                ref={ref => this.flatList = ref}
-                data={data}
-                extraData={this.state.selected}
-                keyExtractor={this._keyExtractor}
-                renderItem={this._renderItem}
-                // 决定当距离内容最底部还有多远时触发onEndReached回调；数值范围0~1，例如：0.5表示可见布局的最底端距离content最底端等于可见布局一半高度的时候调用该回调
-                onEndReachedThreshold={0.1}
-                // 当列表被滚动到距离内容最底部不足onEndReacchedThreshold设置的距离时调用
-                onEndReached={this._onEndReached}
-                ListHeaderComponent={this._renderHeader}
-                ListFooterComponent={this._renderFooter}
-                ItemSeparatorComponent={this._renderItemSeparatorComponent}
-                ListEmptyComponent={this._renderEmptyView}
-                refreshing={this.state.refreshing}
-                onRefresh={this._renderRefresh}
-                // 是一个可选的优化，用于避免动态测量内容；+50是加上Header的高度
-                getItemLayout={(data, index) => ({ length: 40, offset: (40 + 1) * Number(index + 50), index })}
-            />
+            <View>
+                <FlatList
+                    ref={ref => this.flatList = ref}
+                    data={data}
+                    extraData={this.state.selected}
+                    keyExtractor={this._keyExtractor}
+                    renderItem={this._renderItem}
+                    // 决定当距离内容最底部还有多远时触发onEndReached回调；数值范围0~1，例如：0.5表示可见布局的最底端距离content最底端等于可见布局一半高度的时候调用该回调
+                    onEndReachedThreshold={0.1}
+                    // 当列表被滚动到距离内容最底部不足onEndReacchedThreshold设置的距离时调用
+                    onEndReached={debonceFn(500, this._onEndReached)}
+                    ListHeaderComponent={this._renderHeader}
+                    ListFooterComponent={this._renderFooter}
+                    ItemSeparatorComponent={this._renderItemSeparatorComponent}
+                    ListEmptyComponent={this._renderEmptyView}
+                    refreshing={this.state.refreshing}
+                    onRefresh={this._renderRefresh}
+                    // 是一个可选的优化，用于避免动态测量内容；+50是加上Header的高度
+                    getItemLayout={(data, index) => ({ length: 40, offset: (40 + 1) * Number(index + 50), index })}
+                />
+                {fetchProductsUI ? <Loading/> : null}
+            </View>
         )
     }
 }

@@ -36,3 +36,12 @@ export const createAsyncUIReducer = items => {
         return { ...state }
     }
 }
+
+// 去抖动
+export const debonceFn = (interval, cb) => {
+    let timeout = null
+    return function () {
+        clearTimeout(timeout)
+        timeout = setTimeout(() => cb.apply(this, arguments), interval)
+    }
+}

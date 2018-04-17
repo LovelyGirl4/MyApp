@@ -17,6 +17,7 @@ const TabRouteConfigs = {  // 表示各个页面路由配置,让导航器知道�
         screen: Ticket,  // 对应的路由页面
         navigationOptions: ({ navigation }) => ({
             title: '首页',
+            headerBackTitle: null,
             tabBarIcon: ({ focused, tintColor }) => {
                 return <Icon name={focused ? 'home' : 'home-outline'} size={28} color={tintColor} />
             }
@@ -61,7 +62,7 @@ const TabNavigatorConfigs = {
     lazy: true,  // 是否懒加载页面
     tabBarOptions: {
         activeBackgroundColor: 'white',
-        activeTintColor: '#0F9C00',
+        activeTintColor: '#40a9ff',
         inactiveBackgroundColor: 'white',
         inactiveTintColor: 'grey',
         showLabel: true,
@@ -77,7 +78,10 @@ const StackRouteConfigs = {
         screen: Tab,
     },
     Login: {
-        screen: Login
+        screen: Login,
+        navigationOptions: {
+            header: null
+        }
     }
 }
 const StackNavigatorConfigs = {  // 表示导航器的配置，包括导航器的初始页面、各个页面之间导航的动画、页面的配置选项等等

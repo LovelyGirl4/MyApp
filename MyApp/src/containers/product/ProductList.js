@@ -14,9 +14,10 @@ class ProductList extends Component {
         this.props.fetchProducts()
     }
     render() {
-        const { products, pagination, fetchProducts, navigation } = this.props
+        const { products, pagination, fetchProducts, navigation, fetchProductsUI } = this.props
         return <View>
             <ProductListComponent products={products} pagination={pagination} navigation={navigation}
+                fetchProductsUI={fetchProductsUI}
                 fetchProducts={fetchProducts}/>
         </View>
     }
@@ -29,7 +30,8 @@ export default connect(
             current_page: product.data.products.current_page,
             total_page: product.data.products.total_page,
             total_count: product.data.products.total_count
-        }
+        },
+        fetchProductsUI: product.ui.fetchProductsUI
     }),
     {
         fetchProducts

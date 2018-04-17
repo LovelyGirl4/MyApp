@@ -9,6 +9,7 @@ export default class ProductNumber extends PureComponent {
         }
     }
     _onChange = (val) => {
+        this.props.changeCartProductNumber(val)
         this.setState({
             count: val
         })

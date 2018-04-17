@@ -13,18 +13,13 @@ class Login extends Component {
             password: ''
         }
     }
-    handleUsernameChange = (val) => {
+    _handleChange = (key) => (val) => {
         this.setState({
-            username: val
-        })
-    }
-    handlePasswordChange = (val) => {
-        this.setState({
-            password: val
+            [key]: val
         })
     }
 
-    handleClick = () => {
+    _handleClick = () => {
         const {username, password} = this.state
         this.props.doLogin(username, password)
     }
@@ -42,7 +37,7 @@ class Login extends Component {
                     // type="phone"
                     placeholder="186 1234 1234"
                     // value={username}
-                    onChange={this.handleUsernameChange}
+                    onChange={this._handleChange('username')}
                 >
                     <Icon name="account-outline" size={28} color="#4F8EF7" />
                 </InputItem>
@@ -52,7 +47,7 @@ class Login extends Component {
                     type="password"
                     placeholder="****"
                     // value={password}
-                    onChange={this.handlePasswordChange}
+                    onChange={this._handleChange('password')}
                 >
                     <Icon name="key" size={26} color="#4F8EF7" />
                 </InputItem>
@@ -66,7 +61,7 @@ class Login extends Component {
                         <Text style={styles.findPassword}>找回密码?</Text>
                     </Flex.Item>
                 </Flex>
-                <Button type="primary" style={styles.button} onClick={this.handleClick}>登录</Button>
+                <Button type="primary" style={styles.button} onClick={this._handleClick}>登录</Button>
                 <Text style={styles.register}>还没账号？立即注册</Text>   
             </WingBlank>
         </View>

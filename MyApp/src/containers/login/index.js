@@ -11,7 +11,7 @@ class Login extends Component {
     componentWillReceiveProps(nextProps) {
         const { assessToken } = nextProps
         if (assessToken && nextProps.navigation) {
-            nextProps.navigation.navigate('Tab')
+            nextProps.navigation.navigate('Home')
         }
     }
     render() {

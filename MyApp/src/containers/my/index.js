@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { StackNavigator } from 'react-navigation'
+import { Text, View } from 'react-native'
 
 import Profile from './Profile'
 import Setting from './Setting'
@@ -18,8 +19,15 @@ const MyStack = StackNavigator(
         },
         My: {
             screen: Profile,
-            navigationOptions: {
-                title: '我的'
+            navigationOptions: ({navigation}) => {
+                return {
+                    title: '我的',
+                    headerRight: (
+                        <View>
+                            <Text onPress={() => navigation.navigate('Setting')}>设置</Text>
+                        </View>
+                    )
+                }
             }
         },
     },
