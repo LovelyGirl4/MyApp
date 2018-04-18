@@ -12,4 +12,5 @@ export { default as CartProductListComponent} from './cart/ProductList'
 // my
 export { default as MyProfileComponent} from './my/Profile'
 export { default as MySettingComponent} from './my/Setting'
+export { default as MyAddressListComponent} from './my/AddressList'
 

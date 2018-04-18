@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react'
-import { FlatList, TouchableOpacity, Text, View, TextInput, StyleSheet, Image } from 'react-native'
+import { View, Text } from 'react-native'
 import { Button } from 'antd-mobile'
 
 export default class Profile extends PureComponent {

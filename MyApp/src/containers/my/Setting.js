@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { StyleSheet, Text, View } from 'react-native'
+import { View, Text } from 'react-native'
 import { MySettingComponent } from '../../components/index'
 import { fetchMyProfile } from '../../actions/myAction'
 
