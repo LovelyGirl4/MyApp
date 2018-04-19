@@ -5,6 +5,8 @@ import { Text, View } from 'react-native'
 import Profile from './Profile'
 import Setting from './Setting'
 import AddressList from './AddressList'
+
+import {MyAddressComponent} from '../../components/index'
 // ProductDetail.navigationOptions = {
 //     title: 'ProductDetail'
 // }
@@ -23,6 +25,39 @@ const MyStack = StackNavigator(
             screen: AddressList,
             navigationOptions: {
                 title: '管理收货地址'
+            }
+        },
+        AddAddress: {
+            path: 'addNewAddress',
+            screen: MyAddressComponent,
+            navigationOptions: ({navigation}) => {
+                const { address, _addSaveAddress } = navigation.state.params
+                return {
+                    title: '添加新地址',
+                    headerBackTitle: ' ',
+                    headerRight: (
+                        <View>
+                            <Text onPress={() => _addSaveAddress(address)} style={{fontSize: 16}}>保存</Text>
+                        </View>
+                    ),
+                }
+            }
+        },
+        EditAddress: {
+            path: 'editAddress/:id',
+            screen: MyAddressComponent,
+            navigationOptions: ({navigation}) => {
+                const { address, _editSaveAddress } = navigation.state.params
+                return {
+                    title: ' 修改地址',
+                    headerRight: (
+                        <View>
+                            <Text onPress={() => _editSaveAddress(address)} style={{fontSize: 16}}>
+                                保存
+                            </Text>
+                        </View>
+                    ),
+                }
             }
         },
         My: {

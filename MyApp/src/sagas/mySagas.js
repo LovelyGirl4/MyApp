@@ -26,6 +26,22 @@ function* changeMyDefaultAddressFunc(id) {
     }
 }
 
+function* changeMyAddressFunc(address) {
+    try {
+        const data = store.getState().my.data.address
+        const newAddress = data.map(d => {
+            if (d.id === address.id) {
+                return {...address}
+            }
+            return { ...d, checked: address.checked === true ? false : d.checked }
+        })
+        yield put({ type: ActionTypes.CHANGE_MY_ADDRESS_SUCCESS, address: newAddress })
+    } catch (e) {
+        console.log('eeeee:', e)
+        yield put({ type: ActionTypes.CHANGE_MY_ADDRESS_ERROR })
+    }
+}
+
 function* deleteMyAddressFunc(id) {
     try {
         const data = store.getState().my.data.address
@@ -34,6 +50,20 @@ function* deleteMyAddressFunc(id) {
     } catch (e) {
         console.log('eeeee:', e)
         yield put({ type: ActionTypes.DELETE_MY_ADDRESS_ERROR })
+    }
+}
+
+function* addMyAddressFunc(address) {
+    try {
+        let data = store.getState().my.data.address
+        if (address.checked) {
+            data = data.map(d => ({...d, checked: false}))
+        }
+        data.push({...address, id: data.length})
+        yield put({ type: ActionTypes.ADD_MY_ADDRESS_SUCCESS, address: data })
+    } catch (e) {
+        console.log('eeeee:', e)
+        yield put({ type: ActionTypes.ADD_MY_ADDRESS_ERROR })
     }
 }
 
@@ -50,10 +80,22 @@ export default {
             yield call(changeMyDefaultAddressFunc, id)
         }
     },
+    watchChangeMyAddress: function* () {
+        while (true) {
+            const { address } = yield take(ActionTypes.CHANGE_MY_ADDRESS)
+            yield call(changeMyAddressFunc, address)
+        }
+    },
     watchDeleteMyAddress: function* () {
         while (true) {
             const { id } = yield take(ActionTypes.DELETE_MY_ADDRESS)
             yield call(deleteMyAddressFunc, id)
+        }
+    },
+    watchAddMyAddress: function* () {
+        while (true) {
+            const { address } = yield take(ActionTypes.ADD_MY_ADDRESS)
+            yield call(addMyAddressFunc, address)
         }
     },
 }

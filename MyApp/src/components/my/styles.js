@@ -54,6 +54,9 @@ const styles = StyleSheet.create({
         flex: 1,
         textAlign: 'right',
         fontSize: 16
+    },
+    locate: {
+        color: '#ccc'
     }
 })
 

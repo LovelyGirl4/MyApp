@@ -8,7 +8,6 @@ export default class Profile extends PureComponent {
     }
     _toSetting = () => {
         const { profile, navigation } = this.props
-        console.log('navigation:', navigation)
         navigation.navigate('Setting', { profile })
     }
     render() {
