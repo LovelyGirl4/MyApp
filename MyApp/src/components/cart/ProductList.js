@@ -45,7 +45,7 @@ class ProductList extends PureComponent {
 
     // 改变check选中
     _changeCheck = (id, check) => {
-        this.props.changeCartProductChecked(id, check)
+        this.props.updateCartProductChecked(id, check)
     }
 
     // Header布局
@@ -105,7 +105,7 @@ class ProductList extends PureComponent {
                                 <Text style={styles.price}>￥200</Text>
                             </Flex.Item>
                             <Flex.Item>
-                                <ProductNumber count={count} changeCartProductNumber={(val) => this.props.changeCartProductNumber(id, val)}/>
+                                <ProductNumber count={count} updateCartProductNumber={(val) => this.props.updateCartProductNumber(id, val)}/>
                             </Flex.Item>
                         </Flex>
                     </Flex.Item>
@@ -116,7 +116,7 @@ class ProductList extends PureComponent {
 
     // 选中所有
     _checkChange = () => {
-        this.props.changeCartAllProductsChecked(!this.state.check)
+        this.props.updateCartAllProductsChecked(!this.state.check)
         this.setState({
             check: !this.state.check
         })

@@ -22,7 +22,7 @@ function* fetchCartProductsFunc() {
     }
 }
 
-function* changeCartProductCheckedFunc(id, checked) {
+function* updateCartProductCheckedFunc(id, checked) {
     try {
         const data = store.getState().cart.data.cartProducts
         const products = data.map(d => {
@@ -32,27 +32,27 @@ function* changeCartProductCheckedFunc(id, checked) {
                 return {...d}
             }
         })
-        yield put({ type: ActionTypes.CHANGE_CART_PRODUCT_CHECKED_SUCCESS, products })
+        yield put({ type: ActionTypes.UPDATE_CART_PRODUCT_CHECKED_SUCCESS, products })
     } catch (e) {
         console.log('eeeee:', e)
-        yield put({ type: ActionTypes.CHANGE_CART_PRODUCT_CHECKED_ERROR })
+        yield put({ type: ActionTypes.UPDATE_CART_PRODUCT_CHECKED_ERROR })
     }
 }
 
-function* changeCartAllProductsCheckedFunc(checked) {
+function* updateCartAllProductsCheckedFunc(checked) {
     try {
         const data = store.getState().cart.data.cartProducts
         const products = data.map(d => {
             return {...d, checked: checked}
         })
-        yield put({ type: ActionTypes.CHANGE_CART_ALL_PRODUCTS_CHECKED_SUCCESS, products })
+        yield put({ type: ActionTypes.UPDATE_CART_ALL_PRODUCTS_CHECKED_SUCCESS, products })
     } catch (e) {
         console.log('eeeee:', e)
-        yield put({ type: ActionTypes.CHANGE_CART_ALL_PRODUCTS_CHECKED_ERROR })
+        yield put({ type: ActionTypes.UPDATE_CART_ALL_PRODUCTS_CHECKED_ERROR })
     }
 }
 
-function* changeCartProductNumberFunc(id, number) {
+function* updateCartProductNumberFunc(id, number) {
     try {
         const data = store.getState().cart.data.cartProducts
         const products = data.map(d => {
@@ -62,10 +62,10 @@ function* changeCartProductNumberFunc(id, number) {
                 return { ...d }
             }
         })
-        yield put({ type: ActionTypes.CHANGE_CART_PRODUCT_NUMBER_SUCCESS, products })
+        yield put({ type: ActionTypes.UPDATE_CART_PRODUCT_NUMBER_SUCCESS, products })
     } catch (e) {
         console.log('eeeee:', e)
-        yield put({ type: ActionTypes.CHANGE_CART_PRODUCT_NUMBER_ERROR})
+        yield put({ type: ActionTypes.UPDATE_CART_PRODUCT_NUMBER_ERROR})
     }
 }
 
@@ -76,22 +76,22 @@ export default {
             yield call(fetchCartProductsFunc)
         }
     },
-    watchChangeCartProductChecked: function* () {
+    watchUpdateCartProductChecked: function* () {
         while (true) {
-            const { id, checked } = yield take(ActionTypes.CHANGE_CART_PRODUCT_CHECKED)
-            yield call(changeCartProductCheckedFunc, id, checked)
+            const { id, checked } = yield take(ActionTypes.UPDATE_CART_PRODUCT_CHECKED)
+            yield call(updateCartProductCheckedFunc, id, checked)
         }
     },
-    watchChangeCartAllProductsChecked: function* () {
+    watchUpdateCartAllProductsChecked: function* () {
         while (true) {
-            const { checked } = yield take(ActionTypes.CHANGE_CART_ALL_PRODUCTS_CHECKED)
-            yield call(changeCartAllProductsCheckedFunc, checked)
+            const { checked } = yield take(ActionTypes.UPDATE_CART_ALL_PRODUCTS_CHECKED)
+            yield call(updateCartAllProductsCheckedFunc, checked)
         }
     },
-    watchChangeCartProductNumber: function* () {
+    watchUpdateCartProductNumber: function* () {
         while (true) {
-            const { id, number } = yield take(ActionTypes.CHANGE_CART_PRODUCT_NUMBER)
-            yield call(changeCartProductNumberFunc, id, number)
+            const { id, number } = yield take(ActionTypes.UPDATE_CART_PRODUCT_NUMBER)
+            yield call(updateCartProductNumberFunc, id, number)
         }
     }
 }

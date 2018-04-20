@@ -13,20 +13,20 @@ function* fetchMyProfileFunc(pagination) {
     }
 }
 
-function* changeMyDefaultAddressFunc(id) {
+function* updateMyDefaultAddressFunc(id) {
     try {
         const data = store.getState().my.data.address
         const address = data.map(d => {
             return { ...d, checked: d.id === id ? true : false }
         })
-        yield put({ type: ActionTypes.CHANGE_MY_DEFAULT_ADDRESS_SUCCESS, address })
+        yield put({ type: ActionTypes.UPDATE_MY_DEFAULT_ADDRESS_SUCCESS, address })
     } catch (e) {
         console.log('eeeee:', e)
-        yield put({ type: ActionTypes.CHANGE_MY_DEFAULT_ADDRESS_ERROR })
+        yield put({ type: ActionTypes.UPDATE_MY_DEFAULT_ADDRESS_ERROR })
     }
 }
 
-function* changeMyAddressFunc(address) {
+function* updateMyAddressFunc(address) {
     try {
         const data = store.getState().my.data.address
         const newAddress = data.map(d => {
@@ -35,10 +35,10 @@ function* changeMyAddressFunc(address) {
             }
             return { ...d, checked: address.checked === true ? false : d.checked }
         })
-        yield put({ type: ActionTypes.CHANGE_MY_ADDRESS_SUCCESS, address: newAddress })
+        yield put({ type: ActionTypes.UPDATE_MY_ADDRESS_SUCCESS, address: newAddress })
     } catch (e) {
         console.log('eeeee:', e)
-        yield put({ type: ActionTypes.CHANGE_MY_ADDRESS_ERROR })
+        yield put({ type: ActionTypes.UPDATE_MY_ADDRESS_ERROR })
     }
 }
 
@@ -74,16 +74,16 @@ export default {
             yield call(fetchMyProfileFunc)
         }
     },
-    watchChangeMyDefaultAddress: function* () {
+    watchUpdateMyDefaultAddress: function* () {
         while (true) {
-            const {id} = yield take(ActionTypes.CHANGE_MY_DEFAULT_ADDRESS)
-            yield call(changeMyDefaultAddressFunc, id)
+            const {id} = yield take(ActionTypes.UPDATE_MY_DEFAULT_ADDRESS)
+            yield call(updateMyDefaultAddressFunc, id)
         }
     },
-    watchChangeMyAddress: function* () {
+    watchUpdateMyAddress: function* () {
         while (true) {
-            const { address } = yield take(ActionTypes.CHANGE_MY_ADDRESS)
-            yield call(changeMyAddressFunc, address)
+            const { address } = yield take(ActionTypes.UPDATE_MY_ADDRESS)
+            yield call(updateMyAddressFunc, address)
         }
     },
     watchDeleteMyAddress: function* () {

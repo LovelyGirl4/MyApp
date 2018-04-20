@@ -41,7 +41,7 @@ export default class AddressList extends PureComponent {
                     </Text>
                 </View>
                 <View style={styles.operationView}>
-                    <Text onPress={() => this.props._changeDefaultAddress(id)} style={styles.default}>
+                    <Text onPress={() => this.props._updateDefaultAddress(id)} style={styles.default}>
                         <Icon name={checked ? 'check-square' : 'square-o'} color={checked ? '#40a9ff' : 'grey'} size={24} />
                         <Text style={{ color: checked ? '#40a9ff' : 'black'}}>&nbsp;&nbsp;&nbsp;{checked ? '默认地址' : '设为默认'}</Text>
                     </Text>

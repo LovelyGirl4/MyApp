@@ -3,7 +3,8 @@ import { connect } from 'react-redux'
 import { View, Text, ScrollView, Dimensions } from 'react-native'
 import { Modal, Button } from 'antd-mobile'
 import { MyAddressListComponent } from '../../components/index'
-import { changeMyDefaultAddress, deleteMyAddress, changeMyAddress, addMyAddress } from '../../actions/myAction'
+import { updateMyDefaultAddress, deleteMyAddress, updateMyAddress, addMyAddress } from '../../actions/myAction'
+import { trimAllBlank } from '../../common/index'
 
 const alert = Modal.alert
 
@@ -15,8 +16,8 @@ class Profile extends Component {
         // this.props.fetchMyProfile()
     }
     // 改变默认地址
-    _changeDefaultAddress = (id) => {
-        this.props.changeMyDefaultAddress(id)
+    _updateDefaultAddress = (id) => {
+        this.props.updateMyDefaultAddress(id)
     }
     // 删除地址
     _deleteAddress = (id) => {
@@ -38,7 +39,8 @@ class Profile extends Component {
     // 新增地址保存
     _addSaveAddress = (payload) => {
         const { name, telephone, address } = payload
-        if (name && telephone && telephone.length > 6 && telephone.length < 12 && address) {
+        const length = telephone && trimAllBlank(telephone).length 
+        if (name && telephone && length > 6 && length < 12 && address) {
             this.props.addMyAddress(payload)
             this.props.navigation.goBack(null)
         } else {
@@ -48,8 +50,9 @@ class Profile extends Component {
     // 编辑地址保存
     _editSaveAddress = (payload) => {
         const { name, telephone, address } = payload
-        if (name && telephone && telephone.length > 6 && telephone.length < 12 && address) {
-            this.props.changeMyAddress(payload)
+        const length = telephone && trimAllBlank(telephone).length 
+        if (name && telephone && length > 6 && length < 12 && address) {
+            this.props.updateMyAddress(payload)
             this.props.navigation.goBack(null)
         } else {
             this._existAlert(payload)
@@ -58,11 +61,12 @@ class Profile extends Component {
     // 列举警告的情况
     _existAlert = (payload) => {
         const { name, telephone, address } = payload
+        const length = telephone && trimAllBlank(telephone).length 
         if (!name) {
             this._alert('请填写收货人姓名')
         } else if (!telephone) {
             this._alert('请填写联系电话')
-        } else if (telephone.length < 6 || telephone.length > 11) {
+        } else if (length < 7 || length > 11) {
             this._alert('请填写正确的手机号码')
         } else if (!address) {
             this._alert('请填写详细地址')
@@ -82,7 +86,7 @@ class Profile extends Component {
                 {
                     address.map((a, index) => {
                         return <MyAddressListComponent address={a} navigation={navigation} key={index}
-                            _changeDefaultAddress={this._changeDefaultAddress} _deleteAddress={this._deleteAddress}
+                            _updateDefaultAddress={this._updateDefaultAddress} _deleteAddress={this._deleteAddress}
                             _editSaveAddress={this._editSaveAddress}/>
                     })
                 }
@@ -99,8 +103,8 @@ export default connect(
         address: my.data.address
     }),
     {
-        changeMyDefaultAddress,
-        changeMyAddress,
+        updateMyDefaultAddress,
+        updateMyAddress,
         deleteMyAddress,
         addMyAddress
     }

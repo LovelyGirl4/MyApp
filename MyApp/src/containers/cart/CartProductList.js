@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Platform, StyleSheet, Text, View } from 'react-native'
-import { fetchCartProducts, changeCartProductChecked, changeCartAllProductsChecked,
-    changeCartProductNumber } from '../../actions/cartAction'
+import { fetchCartProducts, updateCartProductChecked, updateCartAllProductsChecked,
+    updateCartProductNumber } from '../../actions/cartAction'
 import { CartProductListComponent } from '../../components/index'
 
 class CartProductList extends Component {
@@ -13,13 +13,13 @@ class CartProductList extends Component {
         this.props.fetchCartProducts()
     }
     render() {
-        const { cartProducts, fetchCartProductsUI, navigation, fetchCartProducts, changeCartProductChecked,
-            changeCartAllProductsChecked, changeCartProductNumber} = this.props
+        const { cartProducts, fetchCartProductsUI, navigation, fetchCartProducts, updateCartProductChecked,
+            updateCartAllProductsChecked, updateCartProductNumber} = this.props
         return <View>
             <CartProductListComponent cartProducts={cartProducts} fetchCartProductsUI={fetchCartProductsUI}
-                navigation={navigation} changeCartAllProductsChecked={changeCartAllProductsChecked}
-                fetchCartProducts={fetchCartProducts} changeCartProductChecked={changeCartProductChecked}
-                changeCartProductNumber={changeCartProductNumber}/>
+                navigation={navigation} updateCartAllProductsChecked={updateCartAllProductsChecked}
+                fetchCartProducts={fetchCartProducts} updateCartProductChecked={updateCartProductChecked}
+                updateCartProductNumber={updateCartProductNumber}/>
         </View>
     }
 }
@@ -31,8 +31,8 @@ export default connect(
     }),
     {
         fetchCartProducts,
-        changeCartProductChecked,
-        changeCartAllProductsChecked,
-        changeCartProductNumber
+        updateCartProductChecked,
+        updateCartAllProductsChecked,
+        updateCartProductNumber
     }
 )(CartProductList)

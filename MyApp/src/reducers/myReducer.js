@@ -26,9 +26,9 @@ const data = (state = initialState, action) => {
     switch (action.type) {
     case ActionTypes.FETCH_MY_PROFILE_SUCCESS:
         return { ...state, profile: action.profile }
-    case ActionTypes.CHANGE_MY_DEFAULT_ADDRESS_SUCCESS:
+    case ActionTypes.UPDATE_MY_DEFAULT_ADDRESS_SUCCESS:
         return { ...state, address: action.address }
-    case ActionTypes.CHANGE_MY_ADDRESS_SUCCESS:
+    case ActionTypes.UPDATE_MY_ADDRESS_SUCCESS:
         return { ...state, address: action.address }
     case ActionTypes.DELETE_MY_ADDRESS_SUCCESS:
         return { ...state, address: action.address}

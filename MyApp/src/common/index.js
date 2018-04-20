@@ -45,3 +45,8 @@ export const debonceFn = (interval, cb) => {
         timeout = setTimeout(() => cb.apply(this, arguments), interval)
     }
 }
+
+// 去除字符串所有的空格
+export const trimAllBlank = (text) => {
+    return text.toString().replace(/\s/g, '')
+}

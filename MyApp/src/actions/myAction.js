@@ -1,17 +1,17 @@
-import { FETCH_MY_PROFILE, CHANGE_MY_DEFAULT_ADDRESS, DELETE_MY_ADDRESS, CHANGE_MY_ADDRESS,
+import { FETCH_MY_PROFILE, UPDATE_MY_DEFAULT_ADDRESS, DELETE_MY_ADDRESS, UPDATE_MY_ADDRESS,
     ADD_MY_ADDRESS} from '../constants/ActionTypes'
 
 export const fetchMyProfile = () => ({
     type: FETCH_MY_PROFILE
 })
 
-export const changeMyDefaultAddress = (id) => ({
-    type: CHANGE_MY_DEFAULT_ADDRESS,
+export const updateMyDefaultAddress = (id) => ({
+    type: UPDATE_MY_DEFAULT_ADDRESS,
     id
 })
 
-export const changeMyAddress = (address) => ({
-    type: CHANGE_MY_ADDRESS,
+export const updateMyAddress = (address) => ({
+    type: UPDATE_MY_ADDRESS,
     address
 })
 
