@@ -1,12 +1,12 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { View, Text, ScrollView, Dimensions } from 'react-native'
-import { Modal, Button } from 'antd-mobile'
+import { Button } from 'antd-mobile'
 import { MyAddressListComponent } from '../../components/index'
 import { updateMyDefaultAddress, deleteMyAddress, updateMyAddress, addMyAddress } from '../../actions/myAction'
 import { trimAllBlank } from '../../common/index'
+import { _alert } from '../../utils/index'
 
-const alert = Modal.alert
 
 class Profile extends Component {
     constructor(props) {
@@ -63,21 +63,16 @@ class Profile extends Component {
         const { name, telephone, address } = payload
         const length = telephone && trimAllBlank(telephone).length 
         if (!name) {
-            this._alert('请填写收货人姓名')
+            _alert('请填写收货人姓名')
         } else if (!telephone) {
-            this._alert('请填写联系电话')
+            _alert('请填写联系电话')
         } else if (length < 7 || length > 11) {
-            this._alert('请填写正确的手机号码')
+            _alert('请填写正确的手机号码')
         } else if (!address) {
-            this._alert('请填写详细地址')
+            _alert('请填写详细地址')
         }
     }
-    // 警告
-    _alert = (content) => {
-        alert(content, '', [
-            { text: '确定', onPress: () => console.log(content) },
-        ])
-    }
+
     render() {
         const { address, navigation } = this.props
         const height = Dimensions.get('window').height - 90 - 70

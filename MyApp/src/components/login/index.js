@@ -3,6 +3,10 @@ import { View, Text, StyleSheet, Image } from 'react-native'
 import { Flex, WhiteSpace, WingBlank, List, InputItem, Button, Checkbox } from 'antd-mobile'
 import { createForm } from 'rc-form'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
+import FontIcon from 'react-native-vector-icons/FontAwesome'
+import { _alert } from '../../utils/index'
+import styles from './styles'
+
 const CheckboxItem = Checkbox.CheckboxItem
 
 class Login extends Component {
@@ -21,31 +25,35 @@ class Login extends Component {
 
     _handleClick = () => {
         const {username, password} = this.state
-        this.props.doLogin(username, password)
+        if (!username) {
+            _alert('请输入用户名')
+        } else if (!password) {
+            _alert('请输入密码')
+        } else {
+            this.props.doLogin(username, password)
+        }
     }
 
     render() {
         const { getFieldProps } = this.props.form
         const { username, password } = this.state
-        return <View>
+        return <View style={styles.loginView}>
             {/*<Image style={styles.avator} source={require('../../asset/a.jpeg')} />*/}
             <Text style={styles.login}>登录页面</Text>
             <WingBlank size="lg">
                 <InputItem
-                    style={styles.input}
                     // {...getFieldProps('phone')}
                     // type="phone"
-                    placeholder="186 1234 1234"
+                    placeholder="请输入手机号/邮箱"
                     // value={username}
                     onChange={this._handleChange('username')}
                 >
                     <Icon name="account-outline" size={28} color="#4F8EF7" />
                 </InputItem>
                 <InputItem
-                    style={styles.input}
                     {...getFieldProps('password')}
                     type="password"
-                    placeholder="****"
+                    placeholder="请输入密码"
                     // value={password}
                     onChange={this._handleChange('password')}
                 >
@@ -62,7 +70,32 @@ class Login extends Component {
                     </Flex.Item>
                 </Flex>
                 <Button type="primary" style={styles.button} onClick={this._handleClick}>登录</Button>
-                <Text style={styles.register}>还没账号？立即注册</Text>   
+                <Text style={styles.register}>还没账号？立即注册</Text>
+                <Flex style={styles.third}>
+                    <Flex.Item><View style={styles.splitLine}/></Flex.Item>
+                    <Flex.Item><Text style={styles.thirdAccount}>第三方账户登录</Text></Flex.Item>
+                    <Flex.Item><View style={styles.splitLine}/></Flex.Item>
+                </Flex>
+                <Flex style={styles.icon}>
+                    <Flex.Item>
+                        <View style={styles.qqView}>
+                            <FontIcon name='qq' size={30} style={styles.qq} />
+                        </View>
+                        <Text style={styles.qq}>QQ</Text>
+                    </Flex.Item>
+                    <Flex.Item>
+                        <View style={styles.wechatView}>
+                            <FontIcon name='wechat' size={30} style={styles.wechat} />
+                        </View>
+                        <Text style={styles.wechat}>微信</Text>
+                    </Flex.Item>
+                    <Flex.Item>
+                        <View style={styles.weiboView}>
+                            <FontIcon name='weibo' size={30} style={styles.weibo} />
+                        </View>
+                        <Text style={styles.weibo}>微博</Text>
+                    </Flex.Item>
+                </Flex>
             </WingBlank>
         </View>
     }
@@ -72,48 +105,3 @@ const LoginWrapper = createForm()(Login)
 
 export default LoginWrapper
 
-
-const styles = StyleSheet.create({
-    // avator: {
-    //     height: 60,
-    //     width: 60,
-    //     borderRadius: 25,
-    //     resizeMode: 'center',
-    // },
-    login: {
-        fontSize: 20,
-        fontWeight: 'bold',
-        textAlign: 'center',
-        color: '#008AE6',
-        marginTop: 40,
-        marginBottom: 20
-    },
-    findPassword: {
-        fontSize: 15,
-        textAlign: 'right',
-        color: 'grey',
-        marginRight: 15
-    },
-    remember: {
-        fontSize: 15,
-        color: 'grey',
-    },
-    register: {
-        fontSize: 15,
-        color: '#008AE6',
-        marginTop: 10,
-        marginRight: 15,
-        textAlign: 'right'
-    },
-    input: {
-        marginLeft: 15,
-        marginRight: 15
-    },
-    button: {
-        marginLeft: 15,
-        marginRight: 15
-    },
-    checkbox: {
-        backgroundColor: 'rgba(255, 255, 255, 0)',
-    }
-})
