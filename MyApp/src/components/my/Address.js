@@ -6,70 +6,31 @@ import { createForm } from 'rc-form'
 import styles from './styles'
 import Icon from 'react-native-vector-icons/FontAwesome'
 
-const Item = List.Item
+import area from '../../utils/area.json'
 
-const district = [
-    {
-        label: '安徽省',
-        value: '安徽省',
-        children: [
-            {
-                label: '合肥市',
-                value: '合肥市',
-                children: [
-                    {
-                        label: '肥西县',
-                        value: '肥西县'
-                    }
-                ]
-            },
-            {
-                label: '六安市',
-                value: '六安市',
-                children: [
-                    {
-                        label: '舒城县',
-                        value: '舒城县'
-                    }
-                ]
+const Item = List.Item
+// 省市区数据
+const data = area.map((province, p) => {
+    const cities = province.children.map((city, c) => {
+        const districts = city.children.map((district, d) => {
+            return {
+                label: district,
+                value: district
             }
-        ]
-    },
-    {
-        label: '浙江省',
-        value: '浙江省',
-        children: [
-            {
-                label: '杭州市',
-                value: '杭州市',
-                children: [
-                    {
-                        label: '滨江区',
-                        value: '滨江区'
-                    },
-                    {
-                        label: '西湖区',
-                        value: '西湖区'
-                    }
-                ]
-            },
-            {
-                label: '宁波市',
-                value: '宁波市',
-                children: [
-                    {
-                        label: '江北区',
-                        value: '江北区'
-                    },
-                    {
-                        label: '海曙区',
-                        value: '海曙区'
-                    }
-                ]
-            }
-        ]
+        })
+        return {
+            label: city.name,
+            value: city.name,
+            children: districts
+        }
+    })
+    return {
+        label: province.name,
+        value: province.name,
+        children: cities
     }
-]
+})
+
 
 class Address extends PureComponent {
     constructor(props) {
@@ -98,7 +59,7 @@ class Address extends PureComponent {
 
     render() {
         const { getFieldProps, getFieldError } = this.props.form
-        const { id, name, telephone, address, checked } = this.props.navigation.state.params.address
+        const { id, name, telephone, district, address, checked } = this.props.navigation.state.params.address
 
         return (
             <View>
@@ -135,15 +96,20 @@ class Address extends PureComponent {
                         value={telephone}
                         onChange={this._onChange('telephone')}
                     >联系电话</InputItem>
-                    <Picker extra="请选择"
-                        data={district}
+                    <Picker
+                        data={data}
                         // title="Areas"
                         {...getFieldProps('district', {
                             // initialValue: ['340000', '341500', '341502'],
                         })}
-                        onOk={e => console.log('ok', e)}
+                        onOk={this._onChange('district')}
                         onDismiss={e => console.log('dismiss', e)}
-                        value={address ? [address.slice(0, 3), address.slice(3, 6), address.slice(6, 9)] : undefined}
+                        value={district}
+                        format={(labels) => {
+                            return <Text style={styles.label}>
+                                {labels.length === 0 ? '请选择' : labels.join(',')}
+                            </Text>
+                        }}
                     >
                         <Item arrow="horizontal">所在地区</Item>
                     </Picker>

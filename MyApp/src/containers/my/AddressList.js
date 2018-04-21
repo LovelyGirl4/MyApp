@@ -38,9 +38,9 @@ class Profile extends Component {
     }
     // 新增地址保存
     _addSaveAddress = (payload) => {
-        const { name, telephone, address } = payload
+        const { name, telephone, district, address } = payload
         const length = telephone && trimAllBlank(telephone).length 
-        if (name && telephone && length > 6 && length < 12 && address) {
+        if (name && telephone && length > 6 && length < 12 && district && address) {
             this.props.addMyAddress(payload)
             this.props.navigation.goBack(null)
         } else {
@@ -49,9 +49,9 @@ class Profile extends Component {
     }
     // 编辑地址保存
     _editSaveAddress = (payload) => {
-        const { name, telephone, address } = payload
+        const { name, telephone, district, address } = payload
         const length = telephone && trimAllBlank(telephone).length 
-        if (name && telephone && length > 6 && length < 12 && address) {
+        if (name && telephone && length > 6 && length < 12 && district && address) {
             this.props.updateMyAddress(payload)
             this.props.navigation.goBack(null)
         } else {
@@ -60,7 +60,7 @@ class Profile extends Component {
     }
     // 列举警告的情况
     _existAlert = (payload) => {
-        const { name, telephone, address } = payload
+        const { name, telephone, address, district } = payload
         const length = telephone && trimAllBlank(telephone).length 
         if (!name) {
             _alert('请填写收货人姓名')
@@ -68,6 +68,8 @@ class Profile extends Component {
             _alert('请填写联系电话')
         } else if (length < 7 || length > 11) {
             _alert('请填写正确的手机号码')
+        } else if (!district) {
+            _alert('请选择所在地区')
         } else if (!address) {
             _alert('请填写详细地址')
         }

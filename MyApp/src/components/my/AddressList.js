@@ -19,25 +19,26 @@ export default class AddressList extends PureComponent {
         ])
     }
 
-    _edit = (address) => {
+    _edit = () => {
+        const {address} = this.props
         this.props.navigation.navigate('EditAddress', {
             id: address.id,
             address: address,
             _editSaveAddress: this.props._editSaveAddress
         })
     }
-
+    
     render() {
-        const { id, name, telephone, address, checked } = this.props.address
+        const { id, name, telephone, district, address, checked } = this.props.address
         return (
             <View style={styles.addressContainer}>
                 <View style={styles.headView}>
-                    <Text style={styles.name}>{name}</Text>
-                    <Text style={styles.tel}>{telephone}</Text>
+                    <Text style={styles.name} onPress={this._edit}>{name}</Text>
+                    <Text style={styles.tel} onPress={this._edit}>{telephone}</Text>
                 </View>
                 <View style={styles.addressView}>
-                    <Text style={styles.address}>
-                        {address}
+                    <Text style={styles.address} onPress={this._edit}>
+                        {district.join('')}{address}
                     </Text>
                 </View>
                 <View style={styles.operationView}>
@@ -45,7 +46,7 @@ export default class AddressList extends PureComponent {
                         <Icon name={checked ? 'check-square' : 'square-o'} color={checked ? '#40a9ff' : 'grey'} size={24} />
                         <Text style={{ color: checked ? '#40a9ff' : 'black'}}>&nbsp;&nbsp;&nbsp;{checked ? '默认地址' : '设为默认'}</Text>
                     </Text>
-                    <Text onPress={() => this._edit(this.props.address)} style={styles.edit}>
+                    <Text onPress={this._edit} style={styles.edit}>
                         <OperationIcon name='pencil' color='grey' size={25} />&nbsp;编辑
                     </Text>
                     <Text onPress={() => this._delete(id)} style={styles.del}>

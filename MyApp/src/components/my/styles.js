@@ -57,6 +57,9 @@ const styles = StyleSheet.create({
     },
     locate: {
         color: '#ccc'
+    },
+    label: {
+        fontSize: 16
     }
 })
 

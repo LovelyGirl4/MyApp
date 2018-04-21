@@ -9,14 +9,16 @@ const initialState = {
             id: 0,
             name: '王小花',
             telephone: '13866668888',
-            address: '浙江省杭州市滨江区海创基地北楼',
+            district: ['浙江省', '杭州市', '滨江区'],
+            address: '海创基地北楼',
             checked: true
         },
         {
             id: 1,
             name: '小小酥',
             telephone: '13866668888',
-            address: '浙江省杭州市西湖区骆家庄西苑一区99号',
+            district: ['浙江省', '杭州市', '滨江区'],
+            address: '骆家庄西苑一区99号',
             checked: false
         }
     ]
