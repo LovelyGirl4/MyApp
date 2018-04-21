@@ -60,6 +60,9 @@ const styles = StyleSheet.create({
     },
     label: {
         fontSize: 16
+    },
+    font: {
+        fontSize: 20
     }
 })
 

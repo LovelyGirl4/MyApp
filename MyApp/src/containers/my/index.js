@@ -6,7 +6,7 @@ import Profile from './Profile'
 import Setting from './Setting'
 import AddressList from './AddressList'
 
-import {MyAddressComponent} from '../../components/index'
+import {MyAddressComponent, MyScanComponent} from '../../components/index'
 // ProductDetail.navigationOptions = {
 //     title: 'ProductDetail'
 // }
@@ -58,6 +58,12 @@ const MyStack = StackNavigator(
                         </View>
                     ),
                 }
+            }
+        },
+        Scan: {
+            screen: MyScanComponent,
+            navigationOptions: {
+                title: '扫一扫'
             }
         },
         My: {
