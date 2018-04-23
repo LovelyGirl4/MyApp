@@ -66,6 +66,15 @@ export default class Setting extends PureComponent {
                         >
                                 支付密码管理
                         </Item>
+                        <Item
+                            arrow="horizontal"
+                            multipleLine
+                            onClick={() => {
+                                this.props.navigation.navigate('Location')
+                            }}
+                        >
+                            获取当前位置
+                        </Item>
                     </List>
                 </ScrollView>
                 <View style={{height: 40}}>

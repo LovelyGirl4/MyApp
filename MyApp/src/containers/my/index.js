@@ -6,7 +6,7 @@ import Profile from './Profile'
 import Setting from './Setting'
 import AddressList from './AddressList'
 
-import {MyAddressComponent, MyScanComponent} from '../../components/index'
+import { MyAddressComponent, MyScanComponent, MyLocationComponent } from '../../components/index'
 // ProductDetail.navigationOptions = {
 //     title: 'ProductDetail'
 // }
@@ -64,6 +64,12 @@ const MyStack = StackNavigator(
             screen: MyScanComponent,
             navigationOptions: {
                 title: '扫一扫'
+            }
+        },
+        Location: {
+            screen: MyLocationComponent,
+            navigationOptions: {
+                title: '获取当前位置'
             }
         },
         My: {

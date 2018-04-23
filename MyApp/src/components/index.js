@@ -14,6 +14,7 @@ export { default as MyProfileComponent} from './my/Profile'
 export { default as MySettingComponent} from './my/Setting'
 export { default as MyAddressListComponent} from './my/AddressList'
 export { default as MyAddressComponent} from './my/Address'
+export { default as MyLocationComponent} from './my/Location'
 // scan
 export { default as MyScanComponent } from './scan/Scan'
 
