@@ -13,8 +13,8 @@ export default class AddressList extends PureComponent {
     }
 
     _delete = (id) => {
-        alert('确定要删除该地址吗？', '', [
-            { text: '取消', onPress: () => console.log('cancel') },
+        alert('确定要删除该地址吗？', ' ', [
+            { text: '取消', onPress: () => console.log('cancel'), style: {color: 'grey'} },
             { text: '删除', onPress: () => this.props._deleteAddress(id) },
         ])
     }

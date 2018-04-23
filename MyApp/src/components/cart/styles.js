@@ -29,6 +29,7 @@ const styles = StyleSheet.create({
         borderTopWidth: 1,
         borderBottomWidth: 0.6,
         borderColor: '#ccc',
+        flexDirection: 'row'
     },
     check: {
         flex: 1,
@@ -48,16 +49,39 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center'
     },
-    sumCount: {
+    sumCountTrue: {
         flex: 1,
         height: 58,
         backgroundColor: '#40a9ff',
         justifyContent: 'center',
         alignItems: 'center'
     },
+    sumCountFalse: {
+        flex: 1,
+        height: 58,
+        backgroundColor: '#ccc',
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
     sumCountText: {
         fontSize: 18,
         color: '#fff'
+    },
+    emptyView: {
+        marginTop: '30%',
+        marginBottom: 20,
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+    emptyText: {
+        marginTop: 15,
+        marginBottom: 15,
+        color: 'grey',
+        fontSize: 16
+    },
+    emptyButton: {
+        width: 160,
+        height: 40
     }
 })
 

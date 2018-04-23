@@ -3,7 +3,7 @@ import * as ActionTypes from '../constants/ActionTypes'
 import * as api from '../api/index'
 import store from '../store'
 
-
+// 调接口获取购物车列表
 function* fetchCartProductsFunc() {
     try {
         const cartProducts = yield call(api.fetchCartProducts)
@@ -21,7 +21,7 @@ function* fetchCartProductsFunc() {
         yield put({ type: ActionTypes.FETCH_CART_PRODUCTS_ERROR })
     }
 }
-
+// 是否选中
 function* updateCartProductCheckedFunc(id, checked) {
     try {
         const data = store.getState().cart.data.cartProducts
@@ -38,7 +38,7 @@ function* updateCartProductCheckedFunc(id, checked) {
         yield put({ type: ActionTypes.UPDATE_CART_PRODUCT_CHECKED_ERROR })
     }
 }
-
+// 是否全选
 function* updateCartAllProductsCheckedFunc(checked) {
     try {
         const data = store.getState().cart.data.cartProducts
@@ -51,7 +51,7 @@ function* updateCartAllProductsCheckedFunc(checked) {
         yield put({ type: ActionTypes.UPDATE_CART_ALL_PRODUCTS_CHECKED_ERROR })
     }
 }
-
+// 改变数量
 function* updateCartProductNumberFunc(id, number) {
     try {
         const data = store.getState().cart.data.cartProducts
@@ -66,6 +66,26 @@ function* updateCartProductNumberFunc(id, number) {
     } catch (e) {
         console.log('eeeee:', e)
         yield put({ type: ActionTypes.UPDATE_CART_PRODUCT_NUMBER_ERROR})
+    }
+}
+// 是否编辑
+function* updateCartEditFunc(state) {
+    try {
+        yield put({ type: ActionTypes.UPDATE_CART_EDIT_SUCCESS, state })
+    } catch (e) {
+        console.log('eeeee:', e)
+        yield put({ type: ActionTypes.UPDATE_CART_EDIT_ERROR })
+    }
+}
+// 删除购物车中的商品
+function* deleteCartProductsFunc() {
+    try {
+        const data = store.getState().cart.data.cartProducts
+        const products = data.filter(d => d.checked === false)
+        yield put({ type: ActionTypes.DELETE_CART_PRODUCTS_SUCCESS, products })
+    } catch (e) {
+        console.log('eeeee:', e)
+        yield put({ type: ActionTypes.DELETE_CART_PRODUCTS_ERROR })
     }
 }
 
@@ -92,6 +112,18 @@ export default {
         while (true) {
             const { id, number } = yield take(ActionTypes.UPDATE_CART_PRODUCT_NUMBER)
             yield call(updateCartProductNumberFunc, id, number)
+        }
+    },
+    watchUpdateCartEdit: function* () {
+        while (true) {
+            const { state } = yield take(ActionTypes.UPDATE_CART_EDIT)
+            yield call(updateCartEditFunc, state)
+        }
+    },
+    watchDeleteCartProducts: function* () {
+        while (true) {
+            yield take(ActionTypes.DELETE_CART_PRODUCTS)
+            yield call(deleteCartProductsFunc)
         }
     }
 }

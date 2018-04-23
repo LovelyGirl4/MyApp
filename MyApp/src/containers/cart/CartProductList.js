@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Platform, StyleSheet, Text, View } from 'react-native'
 import { fetchCartProducts, updateCartProductChecked, updateCartAllProductsChecked,
-    updateCartProductNumber } from '../../actions/cartAction'
+    updateCartProductNumber, deleteCartProducts } from '../../actions/cartAction'
 import { CartProductListComponent } from '../../components/index'
 
 class CartProductList extends Component {
@@ -13,13 +13,14 @@ class CartProductList extends Component {
         this.props.fetchCartProducts()
     }
     render() {
-        const { cartProducts, fetchCartProductsUI, navigation, fetchCartProducts, updateCartProductChecked,
-            updateCartAllProductsChecked, updateCartProductNumber} = this.props
+        const { cartProducts, cartEdit, fetchCartProductsUI, navigation, fetchCartProducts, updateCartProductChecked,
+            updateCartAllProductsChecked, updateCartProductNumber, deleteCartProducts} = this.props
         return <View>
             <CartProductListComponent cartProducts={cartProducts} fetchCartProductsUI={fetchCartProductsUI}
                 navigation={navigation} updateCartAllProductsChecked={updateCartAllProductsChecked}
                 fetchCartProducts={fetchCartProducts} updateCartProductChecked={updateCartProductChecked}
-                updateCartProductNumber={updateCartProductNumber}/>
+                updateCartProductNumber={updateCartProductNumber} cartEdit={cartEdit}
+                deleteCartProducts={deleteCartProducts}/>
         </View>
     }
 }
@@ -27,12 +28,14 @@ class CartProductList extends Component {
 export default connect(
     ({ cart }) => ({
         cartProducts: cart.data.cartProducts,
+        cartEdit: cart.data.cartEdit,
         fetchCartProductsUI: cart.ui.fetchCartProductsUI
     }),
     {
         fetchCartProducts,
         updateCartProductChecked,
         updateCartAllProductsChecked,
-        updateCartProductNumber
+        updateCartProductNumber,
+        deleteCartProducts
     }
 )(CartProductList)

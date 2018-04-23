@@ -1,13 +1,14 @@
 import React, { PureComponent } from 'react'
 import { FlatList, TouchableOpacity, Text, View, ScrollView,
     Image, Dimensions } from 'react-native'
-import { Flex, Checkbox, Tag } from 'antd-mobile'
+import { Flex, Checkbox, Tag, Modal, Button } from 'antd-mobile'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import noPicture from '../../asset/no_picture.gif'
 import { baseURL } from '../../common/index'
 import ProductNumber from './ProductNumber'
 import styles from './styles'
 
+const alert = Modal.alert
 
 // import CustomToastAndroid from '../../../js/ToastAndroid'
 
@@ -65,7 +66,11 @@ class ProductList extends PureComponent {
 
     // 空布局
     _renderEmptyView = () => (
-        <View><Text>EmptyView</Text></View>
+        <View style={styles.emptyView}>
+            <Icon name='cart-outline' color='grey' size={50}/>
+            <Text style={styles.emptyText}>购物车空空如也~</Text>
+            <Button type='primary' style={styles.emptyButton} onClick={this._toProductList}>去逛逛</Button>
+        </View>
     )
 
     // 下拉刷新
@@ -121,9 +126,20 @@ class ProductList extends PureComponent {
             check: !this.state.check
         })
     }
+    //删除商品
+    _deleteProducts = () => {
+        alert('确认要删除这些商品吗？', ' ', [
+            { text: '我再想想', onPress: () => console.log('cancel'), style: {color: 'grey'} },
+            { text: '确定', onPress: () => this.props.deleteCartProducts() },
+        ])
+    }
+    // 再去逛逛
+    _toProductList = () => {
+        this.props.navigation.navigate('Product')
+    }
     render() {
         const { check } = this.state
-        const { cartProducts, fetchCartProductsUI } = this.props
+        const { cartProducts, cartEdit, fetchCartProductsUI } = this.props
 
         const height = Dimensions.get('window').height - 90 - 80
 
@@ -158,8 +174,8 @@ class ProductList extends PureComponent {
                         // getItemLayout={(data, index) => ({ length: 40, offset: (40 + 1) * Number(index + 50), index })}
                     />
                 </ScrollView>
-                <View style={styles.footer}>
-                    <View style={{ flexDirection: 'row' }}>
+                {
+                    data.length > 0 ? <View style={styles.footer}>
                         <View style={styles.check}>
                             <Text onPress={this._checkChange}>
                                 <Icon name={check ? 'checkbox-marked-circle' : 'checkbox-blank-circle-outline'}
@@ -172,11 +188,14 @@ class ProductList extends PureComponent {
                             <Text style={{ fontSize: 18 }}>合计:</Text>
                             <Text style={styles.price}>￥{sumMoney}</Text>
                         </View>
-                        <View style={styles.sumCount}>
-                            <Text style={styles.sumCountText}>结算({sumCount})</Text>
+                        <View style={sumCount > 0 ? styles.sumCountTrue : styles.sumCountFalse}>
+                            {
+                                cartEdit ? <Text style={styles.sumCountText} onPress={sumCount > 0 ? this._deleteProducts : null}>删除</Text> :
+                                    <Text style={styles.sumCountText}>结算({sumCount})</Text>
+                            }
                         </View>
-                    </View>
-                </View>
+                    </View> : null
+                }
             </View>
         )
     }
