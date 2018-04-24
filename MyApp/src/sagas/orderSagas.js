@@ -4,10 +4,15 @@ import * as api from '../api/index'
 import store from '../store'
 
 
-function* addProductOrderFunc(order) {
+function* addProductOrderFunc(product) {
     try {
-        const { cartProducts } = store.getState().cart.data
-        const products = cartProducts.filter(c => c.checked === true)
+        let products = []
+        if (product) {
+            products.push(product)
+        } else {
+            const { cartProducts } = store.getState().cart.data
+            products = cartProducts.filter(c => c.checked === true)
+        }
         yield put({ type: ActionTypes.ADD_PRODUCT_ORDER_SUCCESS, products })
     } catch (e) {
         console.log('eeeee:', e)
@@ -27,8 +32,8 @@ function* updateProductOrderAddressFunc(address) {
 export default {
     watchAddProductOrder: function* () {
         while (true) {
-            yield take(ActionTypes.ADD_PRODUCT_ORDER)
-            yield call(addProductOrderFunc)
+            const {product} = yield take(ActionTypes.ADD_PRODUCT_ORDER)
+            yield call(addProductOrderFunc, product)
         }
     },
     watchUpdateProductOrderAddress: function* () {

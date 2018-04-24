@@ -4,6 +4,7 @@ import { Platform, StyleSheet, Text, View } from 'react-native'
 
 import { ProductDetailComponent } from '../../components/index'
 import { addProductToCart } from '../../actions/productAction'
+import { addProductOrder } from '../../actions/orderAction'
 
 
 class ProductList extends Component {
@@ -14,10 +15,10 @@ class ProductList extends Component {
 
     }
     render() {
-        const { addProductToCart, navigation } = this.props
+        const { addProductToCart, addProductOrder, navigation } = this.props
         return <View>
             <ProductDetailComponent navigation={navigation}
-                addProductToCart={addProductToCart} />
+                addProductToCart={addProductToCart} addProductOrder={addProductOrder}/>
         </View>
     }
 }
@@ -25,6 +26,7 @@ class ProductList extends Component {
 export default connect(
     state => ({}),
     {
-        addProductToCart
+        addProductToCart,
+        addProductOrder
     }
 )(ProductList)

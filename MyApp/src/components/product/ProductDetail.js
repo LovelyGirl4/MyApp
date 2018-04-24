@@ -10,12 +10,15 @@ class ProductDetail extends PureComponent {
         super(props)
         this.state = {
             showModal: false,
+            number: 1,
+            status: ''
         }
     }
-    _showModal = (e) => {
+    _showModal = (state) => (e) => {
         e.preventDefault() // 修复 Android 上点击穿透
         this.setState({
-            showModal: true
+            showModal: true,
+            status: state
         })
     }
     _closeModal = () => {
@@ -27,12 +30,23 @@ class ProductDetail extends PureComponent {
         this.setState({
             showModal: false
         })
-        this.props.addProductToCart(id)
+        if (this.state.status === 'cart') {
+            this.props.addProductToCart(id)
+        } else {
+            const { state, navigate } = this.props.navigation
+            this.props.addProductOrder({ ...state.params.item, count: this.state.number})
+            navigate('ProductOrder')
+        }
+    }
+    _changeNumber = (val) => {
+        this.setState({
+            number: val
+        })
     }
     render() {
         const { item } = this.props.navigation.state.params
         const { name, id, images, product_id } = item
-        const { showModal } = this.state
+        const { showModal, number } = this.state
         const source = images.length > 0 ? { uri: baseURL(images[0].url) } : noPicture
 
         return <View>
@@ -41,13 +55,14 @@ class ProductDetail extends PureComponent {
             <Text>{name}</Text>
             <Flex>
                 <Flex.Item>
-                    <Button type="primary" inline onClick={this._showModal}>加入购物车</Button>
+                    <Button type="primary" inline onClick={this._showModal('cart')}>加入购物车</Button>
                 </Flex.Item>
                 <Flex.Item>
-                    <Button type="warning" inline onClick={this._showModal}>立即购买</Button>
+                    <Button type="warning" inline onClick={this._showModal('order')}>立即购买</Button>
                 </Flex.Item>
             </Flex>
-            <ProductModal item={item} showModal={showModal} _closeModal={this._closeModal} _sure={this._sure}/>
+            <ProductModal item={item} number={number} showModal={showModal} _closeModal={this._closeModal}
+                _sure={this._sure} _changeNumber={this._changeNumber}/>
         </View>
     }
 }

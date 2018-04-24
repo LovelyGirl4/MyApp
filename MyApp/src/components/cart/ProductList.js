@@ -110,7 +110,7 @@ class ProductList extends PureComponent {
                                 <Text style={styles.price}>￥200</Text>
                             </Flex.Item>
                             <Flex.Item>
-                                <ProductNumber count={count} updateCartProductNumber={(val) => this.props.updateCartProductNumber(id, val)}/>
+                                <ProductNumber count={count} updateCartProductNumber={(val) => this.props.updateCartProductNumber(id, val)} />
                             </Flex.Item>
                         </Flex>
                     </Flex.Item>

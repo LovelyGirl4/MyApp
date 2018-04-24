@@ -6,6 +6,7 @@ import Icon from 'react-native-vector-icons/MaterialIcons'
 import styles from './styles'
 import Line from './Line'
 import noPicture from '../../asset/no_picture.gif'
+import { baseURL } from '../../common/index'
 
 const Item = List.Item
 
@@ -65,7 +66,7 @@ class Location extends Component {
                         <Item>商品列表</Item>
                         {
                             productOrder.map((p, index) => {
-                                const source = p.images.length > 0 ? { uri: p.images[0].url } : noPicture
+                                const source = p.images.length > 0 ? { uri: baseURL(p.images[0].url) } : noPicture
                                 return <Item key={index}>
                                     <Flex>
                                         <Flex.Item>

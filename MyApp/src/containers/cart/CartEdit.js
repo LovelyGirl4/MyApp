@@ -16,7 +16,7 @@ class CartEdit extends Component {
     render() {
         const { cartEdit } = this.props
         return <View>
-            <Text onPress={this._updateCartEdit} style={{marginRight: 15, color: 'grey'}}>
+            <Text onPress={this._updateCartEdit} style={{marginRight: 15}}>
                 {cartEdit ? '完成' : '编辑'}
             </Text>
         </View>

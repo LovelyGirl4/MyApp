@@ -8,19 +8,10 @@ import { baseURL } from '../../common/index'
 class ProductModal extends PureComponent {
     constructor(props) {
         super(props)
-        this.state = {
-            number: 1
-        }
-    }
-    _changeNumber = (val) => {
-        this.setState({
-            number: val
-        })
     }
     render() {
-        const { item, showModal, _closeModal, _sure } = this.props
+        const { item, number, showModal, _closeModal, _sure } = this.props
         const { name, id, images } = item
-        const {number} = this.state
         const source = images.length > 0 ? { uri: baseURL(images[0].url) } : noPicture
         return (<Modal
             popup
@@ -59,7 +50,7 @@ class ProductModal extends PureComponent {
                             max={100}
                             min={1}
                             value={number}
-                            onChange={this._changeNumber}
+                            onChange={this.props._changeNumber}
                         />
                     </View>
                 </View>
