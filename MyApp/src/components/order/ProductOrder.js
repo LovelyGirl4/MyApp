@@ -17,7 +17,12 @@ class Location extends Component {
         }
     }
     _toAddress = () => {
-        this.props.navigation.navigate('AddressList')
+        const { address, navigation, _addAddress } = this.props
+        if (address.length > 0) {
+            navigation.navigate('CheckAddress')
+        } else {
+            _addAddress()
+        }
     }
     _showModal = () => {
         this.setState({
@@ -34,16 +39,24 @@ class Location extends Component {
         const {width, height} = Dimensions.get('window')
         // const count = parseInt(width / 10)
         const scrollHeight = height - 60 - 60
-        const {address, productOrder} = this.props
-        console.log('address:', address)
-        console.log('productOrder:', productOrder)
+        const { address, productOrder, productOrderAddress } = this.props
+        let checkAddress
+        if (productOrderAddress) {
+            checkAddress = {...productOrderAddress}
+        } else {
+            checkAddress = address.length > 0 && address.filter(a => a.checked === true)[0]
+        }
+        const icon = <Icon name={checkAddress ? 'location-on' : 'add-box'} size={checkAddress? 28 : 40} color='#40a9ff' />
         return (
             <View>
                 <ScrollView style={{ height: scrollHeight }}>
                     <WhiteSpace />
                     <List>
-                        <Item arrow="horizontal" thumb={<Icon name='add-box' size={40} color='#40a9ff' />} onClick={this._toAddress}>
-                            新增收货地址
+                        <Item arrow="horizontal" thumb={icon} onClick={this._toAddress}>
+                            {address.length === 0 ? '新增收货地址' : <View>
+                                <Text style={styles.checkName}>收货人：{checkAddress.name} {checkAddress.telephone}</Text>
+                                <Text style={styles.checkAddress}>收货地址：{checkAddress.district.join('')}{checkAddress.address}</Text>
+                            </View>}
                         </Item>
                     </List>
                     <Line/>

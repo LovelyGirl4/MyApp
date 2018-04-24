@@ -46,6 +46,10 @@ function* deleteMyAddressFunc(id) {
     try {
         const data = store.getState().my.data.address
         const address = data.filter(d => d.id !== id)
+        const check = address.filter(a => a.checked === true)
+        if (check.length === 0 && address.length > 0) {
+            address[0] = {...address[0], checked: true}
+        }
         yield put({ type: ActionTypes.DELETE_MY_ADDRESS_SUCCESS, address })
     } catch (e) {
         console.log('eeeee:', e)
@@ -59,7 +63,7 @@ function* addMyAddressFunc(address) {
         if (address.checked) {
             data = data.map(d => ({...d, checked: false}))
         }
-        data.push({...address, id: data.length})
+        data = [...data].concat({ ...address, id: data.length })
         yield put({ type: ActionTypes.ADD_MY_ADDRESS_SUCCESS, address: data })
     } catch (e) {
         console.log('eeeee:', e)

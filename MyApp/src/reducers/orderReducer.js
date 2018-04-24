@@ -4,6 +4,7 @@ import { createAsyncUIReducer } from '../common/index'
 
 const initialState = {
     productOrder: {},
+    productOrderAddress: undefined,
     ticketOrder: {},
     myOrders: []
 }
@@ -12,6 +13,8 @@ const data = (state = initialState, action) => {
     switch (action.type) {
     case ActionTypes.ADD_PRODUCT_ORDER_SUCCESS:
         return { ...state, productOrder: action.products }
+    case ActionTypes.UPDATE_PRODUCT_ORDER_ADDRESS_SUCCESS:
+        return { ...state, productOrderAddress: action.address }
     default:
         return state
     }

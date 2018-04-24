@@ -13,6 +13,8 @@ import Cart from '../cart/index'
 import My from '../my/index'
 import ProductOrder from '../order/ProductOrder'
 import AddressList from '../my/AddressList'
+import CheckAddress from '../order/CheckAddress'
+import { MyAddressComponent } from '../../components/index'
 
 const TabRouteConfigs = {  // 表示各个页面路由配置,让导航器知道需要导航的路由对应的页面
     Home: {  // 路由名称
@@ -98,6 +100,54 @@ const StackRouteConfigs = {
             title: '管理收货地址'
         }
     },
+    AddAddress: { // 新增地址
+        path: 'addNewAddress',
+        screen: MyAddressComponent,
+        navigationOptions: ({ navigation }) => {
+            const { address, _addSaveAddress } = navigation.state.params
+            return {
+                title: '添加新地址',
+                headerBackTitle: ' ',
+                headerRight: (
+                    <View>
+                        <Text onPress={() => _addSaveAddress(address)} style={styles.titleRight}>保存</Text>
+                    </View>
+                ),
+            }
+        }
+    },
+    EditAddress: { // 编辑地址
+        path: 'editAddress/:id',
+        screen: MyAddressComponent,
+        navigationOptions: ({ navigation }) => {
+            const { address, _editSaveAddress } = navigation.state.params
+            return {
+                title: ' 修改地址',
+                headerRight: (
+                    <View>
+                        <Text onPress={() => _editSaveAddress(address)} style={styles.titleRight}>
+                            保存
+                        </Text>
+                    </View>
+                ),
+            }
+        }
+    },
+    CheckAddress: { // 选择收货地址
+        screen: CheckAddress,
+        navigationOptions: ({ navigation }) => {
+            return {
+                title: '选择收货地址',
+                headerRight: (
+                    <View>
+                        <Text onPress={() => navigation.navigate('AddressList')} style={styles.titleRight}>
+                            编辑
+                        </Text>
+                    </View>
+                ),
+            }
+        }
+    }
 }
 const StackNavigatorConfigs = {  // 表示导航器的配置，包括导航器的初始页面、各个页面之间导航的动画、页面的配置选项等等
     initialRouteName: 'Tab',
@@ -132,3 +182,10 @@ export default connect(
         fetchTickets
     }
 )(Home)
+
+const styles = StyleSheet.create({
+    titleRight: {
+        fontSize: 16,
+        marginRight: 15
+    }
+})

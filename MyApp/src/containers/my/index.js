@@ -27,39 +27,39 @@ const MyStack = StackNavigator(
         //         title: '管理收货地址'
         //     }
         // },
-        AddAddress: {
-            path: 'addNewAddress',
-            screen: MyAddressComponent,
-            navigationOptions: ({navigation}) => {
-                const { address, _addSaveAddress } = navigation.state.params
-                return {
-                    title: '添加新地址',
-                    headerBackTitle: ' ',
-                    headerRight: (
-                        <View>
-                            <Text onPress={() => _addSaveAddress(address)} style={{fontSize: 16}}>保存</Text>
-                        </View>
-                    ),
-                }
-            }
-        },
-        EditAddress: {
-            path: 'editAddress/:id',
-            screen: MyAddressComponent,
-            navigationOptions: ({navigation}) => {
-                const { address, _editSaveAddress } = navigation.state.params
-                return {
-                    title: ' 修改地址',
-                    headerRight: (
-                        <View>
-                            <Text onPress={() => _editSaveAddress(address)} style={{fontSize: 16}}>
-                                保存
-                            </Text>
-                        </View>
-                    ),
-                }
-            }
-        },
+        // AddAddress: {
+        //     path: 'addNewAddress',
+        //     screen: MyAddressComponent,
+        //     navigationOptions: ({navigation}) => {
+        //         const { address, _addSaveAddress } = navigation.state.params
+        //         return {
+        //             title: '添加新地址',
+        //             headerBackTitle: ' ',
+        //             headerRight: (
+        //                 <View>
+        //                     <Text onPress={() => _addSaveAddress(address)} style={{fontSize: 16}}>保存</Text>
+        //                 </View>
+        //             ),
+        //         }
+        //     }
+        // },
+        // EditAddress: {
+        //     path: 'editAddress/:id',
+        //     screen: MyAddressComponent,
+        //     navigationOptions: ({navigation}) => {
+        //         const { address, _editSaveAddress } = navigation.state.params
+        //         return {
+        //             title: ' 修改地址',
+        //             headerRight: (
+        //                 <View>
+        //                     <Text onPress={() => _editSaveAddress(address)} style={{fontSize: 16}}>
+        //                         保存
+        //                     </Text>
+        //                 </View>
+        //             ),
+        //         }
+        //     }
+        // },
         Scan: {
             screen: MyScanComponent,
             navigationOptions: {

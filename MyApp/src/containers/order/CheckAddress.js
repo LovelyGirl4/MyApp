@@ -1,17 +1,20 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Platform, StyleSheet, Text, View } from 'react-native'
-import { ProductOrderComponent } from '../../components/index'
+import { View, Text, ScrollView, Dimensions } from 'react-native'
+import { Button, WhiteSpace } from 'antd-mobile'
+import { CheckAddressComponent } from '../../components/index'
 import { addMyAddress } from '../../actions/myAction'
+import { updateProductOrderAddress } from '../../actions/orderAction'
 import { trimAllBlank } from '../../common/index'
 import { _alert } from '../../utils/index'
 
-class Ticket extends Component {
+
+class Profile extends Component {
     constructor(props) {
         super(props)
     }
     componentDidMount() {
-        // this.props.fetchTickets()
+        // this.props.fetchMyProfile()
     }
     // 跳到新增地址页面
     _addAddress = () => {
@@ -53,22 +56,38 @@ class Ticket extends Component {
             _alert('请填写详细地址')
         }
     }
+
+    _updateProductOrderAddress = (address) => {
+        this.props.updateProductOrderAddress(address)
+        this.props.navigation.goBack(null)
+    }
+
     render() {
-        const { address, productOrder, productOrderAddress, navigation } = this.props
+        const { address, navigation } = this.props
+        const height = Dimensions.get('window').height - 50 - 60
         return <View>
-            <ProductOrderComponent address={address} productOrder={productOrder} navigation={navigation}
-                _addAddress={this._addAddress} productOrderAddress={productOrderAddress}/>
+            <ScrollView style={{ height: height }}>
+                <WhiteSpace/>
+                {
+                    address.map((a, index) => {
+                        return <CheckAddressComponent address={a} navigation={navigation} key={index}
+                            _updateProductOrderAddress={() => this._updateProductOrderAddress(a)}/>
+                    })
+                }
+            </ScrollView>
+            <View style={{ height: 60 }}>
+                <Button type='primary' onClick={this._addAddress}>添加新地址</Button>
+            </View>
         </View>
     }
 }
 
 export default connect(
-    ({my, order}) => ({
-        address: my.data.address,
-        productOrder: order.data.productOrder,
-        productOrderAddress: order.data.productOrderAddress
+    ({ my }) => ({
+        address: my.data.address
     }),
     {
-        addMyAddress
+        addMyAddress,
+        updateProductOrderAddress
     }
-)(Ticket)
+)(Profile)

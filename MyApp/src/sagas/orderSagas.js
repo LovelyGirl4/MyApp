@@ -15,11 +15,26 @@ function* addProductOrderFunc(order) {
     }
 }
 
+function* updateProductOrderAddressFunc(address) {
+    try {
+        yield put({ type: ActionTypes.UPDATE_PRODUCT_ORDER_ADDRESS_SUCCESS, address })
+    } catch (e) {
+        console.log('eeeee:', e)
+        yield put({ type: ActionTypes.UPDATE_PRODUCT_ORDER_ADDRESS_ERROR })
+    }
+}
+
 export default {
     watchAddProductOrder: function* () {
         while (true) {
             yield take(ActionTypes.ADD_PRODUCT_ORDER)
             yield call(addProductOrderFunc)
+        }
+    },
+    watchUpdateProductOrderAddress: function* () {
+        while (true) {
+            const {address} = yield take(ActionTypes.UPDATE_PRODUCT_ORDER_ADDRESS)
+            yield call(updateProductOrderAddressFunc, address)
         }
     },
 }

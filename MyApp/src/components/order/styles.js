@@ -67,6 +67,34 @@ const styles = StyleSheet.create({
         fontSize: 18,
         textAlign: 'center',
         color: '#ff4d4f'
+    },
+    checkName: {
+        fontSize: 18,
+        margin: 10
+    },
+    checkAddress: {
+        fontSize: 16,
+        margin: 10
+    },
+    addressContainer: {
+        backgroundColor: '#fff',
+        borderTopWidth: 0.8,
+        borderColor: '#ccc',
+        padding: 15,
+    },
+    name2: {
+        fontSize: 18
+    },
+    tel: {
+        fontSize: 16,
+        textAlign: 'right',
+    },
+    address: {
+        fontSize: 16,
+        marginTop: 15,
+    },
+    red: {
+        color: '#ff4d4f'
     }
 })
 
