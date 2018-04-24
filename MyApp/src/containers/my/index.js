@@ -20,13 +20,13 @@ const MyStack = StackNavigator(
                 title: '设置',
             }
         },
-        AddressList: {
-            path: 'addressList',
-            screen: AddressList,
-            navigationOptions: {
-                title: '管理收货地址'
-            }
-        },
+        // AddressList: {
+        //     path: 'addressList',
+        //     screen: AddressList,
+        //     navigationOptions: {
+        //         title: '管理收货地址'
+        //     }
+        // },
         AddAddress: {
             path: 'addNewAddress',
             screen: MyAddressComponent,

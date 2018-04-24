@@ -11,6 +11,8 @@ import Ticket from '../ticket/index'
 import Product from '../product/index'
 import Cart from '../cart/index'
 import My from '../my/index'
+import ProductOrder from '../order/ProductOrder'
+import AddressList from '../my/AddressList'
 
 const TabRouteConfigs = {  // 表示各个页面路由配置,让导航器知道需要导航的路由对应的页面
     Home: {  // 路由名称
@@ -74,15 +76,28 @@ const TabNavigatorConfigs = {
 const Tab = TabNavigator(TabRouteConfigs, TabNavigatorConfigs)
 // Stack
 const StackRouteConfigs = {
-    Tab: {
+    Tab: { // 底部的切换页
         screen: Tab,
     },
-    Login: {
+    Login: { // 登录
         screen: Login,
         navigationOptions: {
             header: null
         }
-    }
+    },
+    ProductOrder: { // 商品下订单
+        screen: ProductOrder,
+        navigationOptions: {
+            title: '确认订单'
+        }
+    },
+    AddressList: { // 地址列表
+        path: 'addressList',
+        screen: AddressList,
+        navigationOptions: {
+            title: '管理收货地址'
+        }
+    },
 }
 const StackNavigatorConfigs = {  // 表示导航器的配置，包括导航器的初始页面、各个页面之间导航的动画、页面的配置选项等等
     initialRouteName: 'Tab',

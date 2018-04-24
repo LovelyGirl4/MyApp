@@ -4,6 +4,7 @@ import ticketSagas from './ticketSagas'
 import productSagas from './productSagas'
 import cartSagas from './cartSagas'
 import mySagas from './mySagas'
+import orderSagas from './orderSagas'
 
 function createSagas(...args) {
     const sagas = []
@@ -15,5 +16,5 @@ function createSagas(...args) {
     return sagas
 }
 export default function* root() {
-    yield createSagas(loginSagas, ticketSagas, productSagas, cartSagas, mySagas)
+    yield createSagas(loginSagas, ticketSagas, productSagas, cartSagas, mySagas, orderSagas)
 }

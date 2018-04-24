@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react'
 import { FlatList, TouchableOpacity, Text, View, ScrollView,
     Image, Dimensions } from 'react-native'
-import { Flex, Checkbox, Tag, Modal, Button } from 'antd-mobile'
+import { Flex, Checkbox, Tag, Modal, Button, Toast } from 'antd-mobile'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import noPicture from '../../asset/no_picture.gif'
 import { baseURL } from '../../common/index'
@@ -137,6 +137,15 @@ class ProductList extends PureComponent {
     _toProductList = () => {
         this.props.navigation.navigate('Product')
     }
+    // 下订单
+    _makeOrder = (count) => {
+        if (count === 0) {
+            Toast.info('您还没有选择宝贝哦!', 1)
+        } else {
+            this.props.addProductOrder()
+            this.props.navigation.navigate('ProductOrder')
+        }
+    }
     render() {
         const { check } = this.state
         const { cartProducts, cartEdit, fetchCartProductsUI } = this.props
@@ -191,7 +200,7 @@ class ProductList extends PureComponent {
                         <View style={sumCount > 0 ? styles.sumCountTrue : styles.sumCountFalse}>
                             {
                                 cartEdit ? <Text style={styles.sumCountText} onPress={sumCount > 0 ? this._deleteProducts : null}>删除</Text> :
-                                    <Text style={styles.sumCountText}>结算({sumCount})</Text>
+                                    <Text style={styles.sumCountText} onPress={() => this._makeOrder(sumCount)}>结算({sumCount})</Text>
                             }
                         </View>
                     </View> : null

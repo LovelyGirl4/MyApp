@@ -17,4 +17,6 @@ export { default as MyAddressComponent} from './my/Address'
 export { default as MyLocationComponent} from './my/Location'
 // scan
 export { default as MyScanComponent } from './scan/Scan'
+// order
+export { default as ProductOrderComponent } from './order/ProductOrder'
 

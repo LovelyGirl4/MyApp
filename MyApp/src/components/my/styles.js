@@ -4,7 +4,7 @@ import { StyleSheet } from 'react-native'
 const styles = StyleSheet.create({
     addressContainer: {
         backgroundColor: '#fff',
-        marginBottom: 15
+        marginTop: 15
     },
     headView: {
         flexDirection: 'row',

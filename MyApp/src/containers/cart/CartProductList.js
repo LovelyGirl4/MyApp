@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { Platform, StyleSheet, Text, View } from 'react-native'
 import { fetchCartProducts, updateCartProductChecked, updateCartAllProductsChecked,
     updateCartProductNumber, deleteCartProducts } from '../../actions/cartAction'
+import { addProductOrder } from '../../actions/orderAction'
 import { CartProductListComponent } from '../../components/index'
 
 class CartProductList extends Component {
@@ -14,13 +15,13 @@ class CartProductList extends Component {
     }
     render() {
         const { cartProducts, cartEdit, fetchCartProductsUI, navigation, fetchCartProducts, updateCartProductChecked,
-            updateCartAllProductsChecked, updateCartProductNumber, deleteCartProducts} = this.props
+            updateCartAllProductsChecked, updateCartProductNumber, deleteCartProducts, addProductOrder} = this.props
         return <View>
             <CartProductListComponent cartProducts={cartProducts} fetchCartProductsUI={fetchCartProductsUI}
                 navigation={navigation} updateCartAllProductsChecked={updateCartAllProductsChecked}
                 fetchCartProducts={fetchCartProducts} updateCartProductChecked={updateCartProductChecked}
                 updateCartProductNumber={updateCartProductNumber} cartEdit={cartEdit}
-                deleteCartProducts={deleteCartProducts}/>
+                deleteCartProducts={deleteCartProducts} addProductOrder={addProductOrder}/>
         </View>
     }
 }
@@ -36,6 +37,7 @@ export default connect(
         updateCartProductChecked,
         updateCartAllProductsChecked,
         updateCartProductNumber,
-        deleteCartProducts
+        deleteCartProducts,
+        addProductOrder
     }
 )(CartProductList)

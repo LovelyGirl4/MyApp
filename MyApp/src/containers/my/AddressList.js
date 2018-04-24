@@ -77,7 +77,7 @@ class Profile extends Component {
 
     render() {
         const { address, navigation } = this.props
-        const height = Dimensions.get('window').height - 90 - 70
+        const height = Dimensions.get('window').height - 50 - 60
         return <View>
             <ScrollView style={{height: height}}>
                 {

@@ -5,6 +5,7 @@ import ticket from './ticketReducer'
 import product from './productReducer'
 import cart from './cartReducer'
 import my from './myReducer'
+import order from './orderReducer'
 
 // const initialState = {
 //     token: ''
@@ -28,5 +29,6 @@ export default combineReducers({
     ticket,
     product,
     cart,
-    my
+    my,
+    order
 })
