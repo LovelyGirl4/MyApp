@@ -31,6 +31,7 @@ export const updateCartEdit = (state) => ({
 })
 
 // 删除购物车中商品
-export const deleteCartProducts = () => ({
-    type: ActionTypes.DELETE_CART_PRODUCTS
+export const deleteCartProducts = (id) => ({
+    type: ActionTypes.DELETE_CART_PRODUCTS,
+    id
 })

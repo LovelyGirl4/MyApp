@@ -78,10 +78,16 @@ function* updateCartEditFunc(state) {
     }
 }
 // 删除购物车中的商品
-function* deleteCartProductsFunc() {
+function* deleteCartProductsFunc(id) {
     try {
         const data = store.getState().cart.data.cartProducts
-        const products = data.filter(d => d.checked === false)
+        let products
+        // 如果有id,就是单个删除，没有则为批量删除
+        if (id) {
+            products = data.filter(d => d.id !== id)
+        } else {
+            products = data.filter(d => d.checked === false)
+        }
         yield put({ type: ActionTypes.DELETE_CART_PRODUCTS_SUCCESS, products })
     } catch (e) {
         console.log('eeeee:', e)
@@ -122,8 +128,8 @@ export default {
     },
     watchDeleteCartProducts: function* () {
         while (true) {
-            yield take(ActionTypes.DELETE_CART_PRODUCTS)
-            yield call(deleteCartProductsFunc)
+            const {id} = yield take(ActionTypes.DELETE_CART_PRODUCTS)
+            yield call(deleteCartProductsFunc, id)
         }
     }
 }

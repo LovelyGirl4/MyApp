@@ -82,6 +82,17 @@ const styles = StyleSheet.create({
     emptyButton: {
         width: 160,
         height: 40
+    },
+    rowBack: {
+        backgroundColor: '#ff4d4f',
+        height: 115,
+        justifyContent: 'center',
+    },
+    rowBackText: {
+        fontSize: 18,
+        color: '#fff',
+        textAlign: 'right',
+        marginRight: 15
     }
 })
 

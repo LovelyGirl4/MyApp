@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react'
 import { FlatList, TouchableOpacity, Text, View, ScrollView,
     Image, Dimensions } from 'react-native'
 import { Flex, Checkbox, Tag, Modal, Button, Toast } from 'antd-mobile'
+import { SwipeRow } from 'react-native-swipe-list-view'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import noPicture from '../../asset/no_picture.gif'
 import { baseURL } from '../../common/index'
@@ -91,31 +92,37 @@ class ProductList extends PureComponent {
         const { name, id, images, product_id, count, checked } = item
         const source = images.length > 0 ? { uri: baseURL(images[0].url) } : noPicture
         return (
-            <CheckboxItem onChange={(e) => this._changeCheck(id, e.target.checked)} checked={checked}>
-                <Flex style={styles.grid}>
-                    <Flex.Item>
-                        <TouchableOpacity
-                            id={id}
-                            activeOpacity={0.8}
-                            onPress={() => this._onPressItem(item)}
-                        >
-                            <Image source={source} style={styles.img} />
-                        </TouchableOpacity>
-                    </Flex.Item>
-                    <Flex.Item style={{ flex: 3 }}>
-                        <Text style={styles.title} onPress={() => this._onPressItem(item)}>{name}</Text>
-                        <Tag selected>香辣</Tag>
-                        <Flex>
-                            <Flex.Item>
-                                <Text style={styles.price}>￥200</Text>
-                            </Flex.Item>
-                            <Flex.Item>
-                                <ProductNumber count={count} updateCartProductNumber={(val) => this.props.updateCartProductNumber(id, val)} />
-                            </Flex.Item>
-                        </Flex>
-                    </Flex.Item>
-                </Flex>
-            </CheckboxItem>
+            <SwipeRow leftOpenValue={0} rightOpenValue={-75}
+                disableRightSwipe={true} >
+                <View style={styles.rowBack}>
+                    <Text style={styles.rowBackText} onPress={() => this._deleteProduct(id)}>删  除</Text>
+                </View>
+                <CheckboxItem onChange={(e) => this._changeCheck(id, e.target.checked)} checked={checked}>
+                    <Flex style={styles.grid}>
+                        <Flex.Item>
+                            <TouchableOpacity
+                                id={id}
+                                activeOpacity={0.8}
+                                onPress={() => this._onPressItem(item)}
+                            >
+                                <Image source={source} style={styles.img} />
+                            </TouchableOpacity>
+                        </Flex.Item>
+                        <Flex.Item style={{ flex: 3 }}>
+                            <Text style={styles.title} onPress={() => this._onPressItem(item)}>{name}</Text>
+                            <Tag selected>香辣</Tag>
+                            <Flex>
+                                <Flex.Item>
+                                    <Text style={styles.price}>￥200</Text>
+                                </Flex.Item>
+                                <Flex.Item>
+                                    <ProductNumber count={count} updateCartProductNumber={(val) => this.props.updateCartProductNumber(id, val)} />
+                                </Flex.Item>
+                            </Flex>
+                        </Flex.Item>
+                    </Flex>
+                </CheckboxItem>
+            </SwipeRow>
         )
     }
 
@@ -125,6 +132,10 @@ class ProductList extends PureComponent {
         this.setState({
             check: !this.state.check
         })
+    }
+    // 删除商品
+    _deleteProduct = (id) => {
+        this.props.deleteCartProducts(id)
     }
     //删除商品
     _deleteProducts = () => {
