@@ -7,7 +7,7 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import { tokenLogin } from '../../actions/loginAction'
 import { fetchTickets } from '../../actions/ticketAction'
 import Login from '../login/index'
-import Ticket from '../ticket/index'
+import { TicketList, TicketDetail } from '../ticket/index'
 import Product from '../product/index'
 import Cart from '../cart/index'
 import My from '../my/index'
@@ -18,7 +18,7 @@ import { MyAddressComponent } from '../../components/index'
 
 const TabRouteConfigs = {  // 表示各个页面路由配置,让导航器知道需要导航的路由对应的页面
     Home: {  // 路由名称
-        screen: Ticket,  // 对应的路由页面
+        screen: TicketList,  // 对应的路由页面
         navigationOptions: ({ navigation }) => ({
             title: '首页',
             headerBackTitle: null,
@@ -80,6 +80,13 @@ const Tab = TabNavigator(TabRouteConfigs, TabNavigatorConfigs)
 const StackRouteConfigs = {
     Tab: { // 底部的切换页
         screen: Tab,
+    },
+    TicketDetail: {
+        path: 'ticketDetail/:id',
+        screen: TicketDetail,
+        navigationOptions: {
+            title: '景点详情'
+        }
     },
     Login: { // 登录
         screen: Login,

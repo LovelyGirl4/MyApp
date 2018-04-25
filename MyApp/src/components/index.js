@@ -3,7 +3,8 @@ export { default as LoginComponent} from './login/index'
 // home
 export { default as HomeComponent} from './home/index'
 // ticket
-export { default as TicketComponent} from './ticket/index'
+export { default as TicketListComponent} from './ticket/TicketList'
+export { default as TicketDetailComponent} from './ticket/TicketDetail'
 // product
 export { default as ProductListComponent} from './product/ProductList'
 export { default as ProductDetailComponent } from './product/ProductDetail'
