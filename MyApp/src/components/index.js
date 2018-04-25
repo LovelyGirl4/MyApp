@@ -21,4 +21,5 @@ export { default as MyScanComponent } from './scan/Scan'
 // order
 export { default as ProductOrderComponent } from './order/ProductOrder'
 export { default as CheckAddressComponent } from './order/CheckAddress'
+export { default as TicketOrderComponent } from './order/TicketOrder'
 

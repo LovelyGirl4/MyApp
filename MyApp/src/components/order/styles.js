@@ -1,22 +1,25 @@
 'use strict'
 import { StyleSheet } from 'react-native'
 
+const blue = '#1890ff'
+const red = '#ff4d4f'
+const white = '#fff'
+const grey = '#ccc'
+
 const styles = StyleSheet.create({
     addAddressView: {
         flexDirection: 'row'
     },
     blueLine: {
-        backgroundColor: '#1890ff',
+        backgroundColor: blue,
         height: 1.5
     },
     redLine: {
-        backgroundColor: '#ff4d4f',
+        backgroundColor: red,
         height: 1.5
     },
     whiteline: {
         flex: 0.5,
-        // backgroundColor: '#fff',
-        // height: 1.5
     },
     footer: {
         flexDirection: 'row',
@@ -25,23 +28,23 @@ const styles = StyleSheet.create({
     sumView: {
         flex: 2,
         justifyContent: 'center',
-        backgroundColor: '#fff'
+        backgroundColor: white
     },
     sum: {
-        color: '#ff4d4f',
+        color: red,
         textAlign: 'right',
         fontSize: 16,
         paddingRight: 15
     },
     submitView: {
         flex: 1,
-        backgroundColor: '#ff4d4f',
+        backgroundColor: red,
         justifyContent: 'center',
         alignItems: 'center'
     },
     submit: {
         fontSize: 18,
-        color: '#fff'
+        color: white
     },
     count: {
         textAlign: 'right',
@@ -57,7 +60,7 @@ const styles = StyleSheet.create({
     },
     price: {
         fontSize: 17,
-        color: '#ff4d4f'
+        color: red
     },
     modalHead: {
         fontSize: 20,
@@ -66,7 +69,7 @@ const styles = StyleSheet.create({
     modalFoot: {
         fontSize: 18,
         textAlign: 'center',
-        color: '#ff4d4f'
+        color: red
     },
     checkName: {
         fontSize: 18,
@@ -77,9 +80,9 @@ const styles = StyleSheet.create({
         margin: 10
     },
     addressContainer: {
-        backgroundColor: '#fff',
+        backgroundColor: white,
         borderTopWidth: 0.8,
-        borderColor: '#ccc',
+        borderColor: grey,
         padding: 15,
     },
     name2: {
@@ -94,7 +97,7 @@ const styles = StyleSheet.create({
         marginTop: 15,
     },
     red: {
-        color: '#ff4d4f'
+        color: red
     }
 })
 

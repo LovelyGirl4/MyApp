@@ -13,6 +13,11 @@ export default class TicketDetail extends PureComponent {
     constructor(props) {
         super(props)
     }
+
+    _toTicketOrder = () => {
+        this.props.navigation.navigate('TicketOrder')
+    }
+
     render() {
         const {navigation} = this.props
         const { id, name, images } = navigation.state.params.ticket
@@ -40,7 +45,7 @@ export default class TicketDetail extends PureComponent {
                     </Text>
                 </Item>
                 <Item
-                    extra={<Button type='warning' style={styles.button}>￥20</Button>}
+                    extra={<Button type='warning' style={styles.button} onClick={this._toTicketOrder}>￥20</Button>}
                     style={styles.ticketItem}
                 >
                     杭州动物园成人票
@@ -56,7 +61,9 @@ export default class TicketDetail extends PureComponent {
                     </View>
                 </Item>
                 <Item
-                    extra={<Button type='warning' style={styles.button}>￥40</Button>}
+                    extra={<Button type='warning' style={styles.button} onClick={this._toTicketOrder}>
+                        ￥40
+                    </Button>}
                     style={styles.ticketItem}
                 >
                     杭州动物园双人票

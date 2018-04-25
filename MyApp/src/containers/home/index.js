@@ -8,12 +8,11 @@ import { tokenLogin } from '../../actions/loginAction'
 import { fetchTickets } from '../../actions/ticketAction'
 import Login from '../login/index'
 import { TicketList, TicketDetail } from '../ticket/index'
+import { ProductOrder, CheckAddress, TicketOrder } from '../order/index'
 import Product from '../product/index'
 import Cart from '../cart/index'
 import My from '../my/index'
-import ProductOrder from '../order/ProductOrder'
 import AddressList from '../my/AddressList'
-import CheckAddress from '../order/CheckAddress'
 import { MyAddressComponent } from '../../components/index'
 
 const TabRouteConfigs = {  // 表示各个页面路由配置,让导航器知道需要导航的路由对应的页面
@@ -98,6 +97,12 @@ const StackRouteConfigs = {
         screen: ProductOrder,
         navigationOptions: {
             title: '确认订单'
+        }
+    },
+    TicketOrder: { // 购票下单
+        screen: TicketOrder,
+        navigationOptions: {
+            title: '提交订单'
         }
     },
     AddressList: { // 地址列表

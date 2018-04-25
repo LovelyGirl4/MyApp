@@ -1,4 +1,4 @@
-// 获取当前位置
+// 商品下单
 import React, { Component } from 'react'
 import { View, Text, Dimensions, ScrollView, Image } from 'react-native'
 import { Flex, List, WhiteSpace, InputItem, Modal } from 'antd-mobile'
