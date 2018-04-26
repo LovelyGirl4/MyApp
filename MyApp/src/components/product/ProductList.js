@@ -175,7 +175,7 @@ class ProductList extends PureComponent {
                     // 是一个可选的优化，用于避免动态测量内容；+50是加上Header的高度
                     getItemLayout={(data, index) => ({ length: 40, offset: (40 + 1) * Number(index + 50), index })}
                 />
-                {fetchProductsUI ? <Loading/> : null}
+                {/*{fetchProductsUI ? <Loading/> : null}*/}
             </View>
         )
     }

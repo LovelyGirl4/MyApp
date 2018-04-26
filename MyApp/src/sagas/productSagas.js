@@ -1,14 +1,18 @@
 import { put, take, fork, call, select } from 'redux-saga/effects'
+import { Toast } from 'antd-mobile'
 import * as ActionTypes from '../constants/ActionTypes'
 import * as api from '../api/index'
 
 function* fetchProductsFunc(pagination) {
     try {
+        Toast.loading('加载中', 30)
         const products = yield call(api.fetchTickets, pagination)
         yield put({ type: ActionTypes.FETCH_PRODUCTS_SUCCESS, products })
+        Toast.hide()
     } catch (e) {
         console.log('eeeee:', e)
         yield put({ type: ActionTypes.FETCH_PRODUCTS_ERROR })
+        Toast.hide()
     }
 }
 
