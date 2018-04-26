@@ -110,6 +110,12 @@ const styles = StyleSheet.create({
         fontSize: 14,
         color: red
     },
+    ticTitle: {
+        backgroundColor: '#fff',
+        paddingLeft: 15,
+        marginTop: 10,
+        height: 60
+    },
     // calendar
     calContainer: {
         flexDirection: 'row',
@@ -159,7 +165,7 @@ const styles = StyleSheet.create({
         backgroundColor: 'gray'
     },
     line: {
-        height: 0.8,
+        height: 0.6,
         backgroundColor: '#ccc'
     }
 })

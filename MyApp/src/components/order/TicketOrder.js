@@ -1,7 +1,7 @@
 // 门票下单
 import React, { PureComponent } from 'react'
 import { View, Text, Dimensions, ScrollView, Image } from 'react-native'
-import { Flex, List, WhiteSpace, InputItem, Modal, Tag } from 'antd-mobile'
+import { Flex, List, WhiteSpace, Stepper } from 'antd-mobile'
 import moment from 'moment'
 import styles from './styles'
 import Calendar from './Calendar'
@@ -17,6 +17,7 @@ export default class TicketOrder extends PureComponent {
         super(props),
         this.state = {
             selectDate: today,
+            number: 1,
             calendarShow: false
         }
     }
@@ -24,6 +25,13 @@ export default class TicketOrder extends PureComponent {
     _checkDate = (date) => {
         this.setState({
             selectDate: date
+        })
+    }
+    // 更多里面选日期
+    _onDayPress = (day) => {
+        this.setState({
+            selectDate: day.dateString,
+            calendarShow: false
         })
     }
     // 更多日期，显示日历
@@ -37,20 +45,20 @@ export default class TicketOrder extends PureComponent {
             calendarShow: false
         })
     }
-    _onDayPress = (day) => {
+    // 购买数量
+    _numberChange = (val) => {
         this.setState({
-            selectDate: day.dateString,
-            calendarShow: false
+            number: val
         })
     }
     render() {
         const { ticketOrder } = this.props
-        const { selectDate, calendarShow } = this.state
+        const { selectDate, calendarShow, number} = this.state
         const scrollHeight = Dimensions.get('window').height - 60 - 60
 
         return <View>
             <ScrollView style={{height: scrollHeight}}>
-                <View style={{ backgroundColor: '#fff', paddingLeft: 15 }}>
+                <View style={styles.ticTitle}>
                     <Text style={{ fontSize: 20}}>{ticketOrder.name}</Text>
                     <Text>凭身份证直接入园</Text>
                 </View>
@@ -69,6 +77,17 @@ export default class TicketOrder extends PureComponent {
                         _onDayPress={this._onDayPress}
                     />
                 </View>
+                <List>
+                    <Item extra={<Stepper
+                        style={{width: 60}}
+                        max={10}
+                        min={1}
+                        value={number}
+                        onChange={this._numberChange}
+                    />}>
+                        购买数量
+                    </Item>
+                </List>
             </ScrollView>
             <View style={styles.footer}>
                 <View style={styles.sumView}>
