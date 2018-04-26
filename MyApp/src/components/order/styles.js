@@ -1,10 +1,7 @@
 'use strict'
 import { StyleSheet, Dimensions } from 'react-native'
 
-const blue = '#1890ff'
-const red = '#ff4d4f'
-const white = '#fff'
-const grey = '#ccc'
+import { blue, red, white, grey } from '../../utils/colors'
 
 const { height, width } = Dimensions.get('window')
 
@@ -144,6 +141,26 @@ const styles = StyleSheet.create({
     },
     calPrice: {
         color: red
+    },
+    calendar: {
+        borderTopWidth: 1,
+        paddingTop: 5,
+        borderBottomWidth: 1,
+        borderColor: '#eee',
+        height: 350
+    },
+    calTitle: {
+        fontSize: 18,
+        textAlign: 'center',
+        margin: 10
+    },
+    container: {
+        flex: 1,
+        backgroundColor: 'gray'
+    },
+    line: {
+        height: 0.8,
+        backgroundColor: '#ccc'
     }
 })
 

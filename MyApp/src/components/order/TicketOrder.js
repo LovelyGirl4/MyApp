@@ -37,6 +37,12 @@ export default class TicketOrder extends PureComponent {
             calendarShow: false
         })
     }
+    _onDayPress = (day) => {
+        this.setState({
+            selectDate: day.dateString,
+            calendarShow: false
+        })
+    }
     render() {
         const { ticketOrder } = this.props
         const { selectDate, calendarShow } = this.state
@@ -59,7 +65,9 @@ export default class TicketOrder extends PureComponent {
                 <View style={{ backgroundColor: '#fff', padding: 15 }}>
                     <Text style={{fontSize: 18}}>使用日期</Text>
                     <Calendar selectDate={selectDate} _checkDate={this._checkDate} calendarShow={calendarShow}
-                        _showCalendar={this._showCalendar} _closeCalendar={this._closeCalendar}/>
+                        _showCalendar={this._showCalendar} _closeCalendar={this._closeCalendar}
+                        _onDayPress={this._onDayPress}
+                    />
                 </View>
             </ScrollView>
             <View style={styles.footer}>
