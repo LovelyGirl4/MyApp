@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, Text } from 'react-native'
+import { View, Text, Dimensions } from 'react-native'
 import { Calendar, Tag } from 'antd-mobile'
 import moment from 'moment'
 import Icon from 'react-native-vector-icons/EvilIcons'
@@ -29,12 +29,13 @@ const calcDateName = (date) => {
         return date
     }
 }
-
+const { height, width } = Dimensions.get('window')
 const CalendarComponent = (props) => {
     const today = moment().format('L')
     const tomorrow = moment().add(1, 'days').format('L')
     const afterTomorrow = moment().add(2, 'days').format('L')
     const variableText = moment().add(2, 'days').format('dddd')
+    const { selectDate, calendarShow } = props
     const arr = [
         {
             text: '今天',
@@ -51,17 +52,28 @@ const CalendarComponent = (props) => {
     ]
     return <View style={styles.calContainer}>
         {arr.map((a, index) => {
-            return <View key={index} style={styles.calItem}>
-                <Text style={styles.calDate}>
+            return <View key={index}
+                style={{
+                    width: (width - 54) / 4,
+                    borderWidth: 0.8,
+                    borderRadius: 5,
+                    marginRight: 8,
+                    height: 45,
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    borderColor: selectDate === a.date ? '#1890ff' : '#ccc'
+                }}
+            >
+                <Text style={styles.calDate} onPress={() => props._checkDate(a.date)}>
                     {index === 2 ? `${calcDate(a.date)}${a.text}` : `${a.text}${calcDate(a.date)}`}
                 </Text>
-                <Text style={styles.calPrice}>￥20</Text>
+                <Text style={styles.calPrice} onPress={() => props._checkDate(a.date)}>￥20</Text>
             </View>
         })}
         <View style={styles.calMoreItem}>
             <View style={{ marginRight: -10 }}>
                 <Text style={styles.calDate}>更多日期</Text>
-                <Text style={styles.calPrice}>￥20</Text>
+                <Text style={styles.calPrice}>￥20起</Text>
             </View>
             <Icon name='chevron-right' color='grey' size={28} style={{marginRight: -5}}/>
         </View>
