@@ -20,6 +20,15 @@ function* addProductOrderFunc(product) {
     }
 }
 
+function* addTicketOrderFunc(place) {
+    try {
+        yield put({ type: ActionTypes.ADD_TICKET_ORDER_SUCCESS, place })
+    } catch (e) {
+        console.log('eeeee:', e)
+        yield put({ type: ActionTypes.ADD_TICKET_ORDER_ERROR })
+    }
+}
+
 function* updateProductOrderAddressFunc(address) {
     try {
         yield put({ type: ActionTypes.UPDATE_PRODUCT_ORDER_ADDRESS_SUCCESS, address })
@@ -34,6 +43,12 @@ export default {
         while (true) {
             const {product} = yield take(ActionTypes.ADD_PRODUCT_ORDER)
             yield call(addProductOrderFunc, product)
+        }
+    },
+    watchAddTicketOrder: function* () {
+        while (true) {
+            const { place } = yield take(ActionTypes.ADD_TICKET_ORDER)
+            yield call(addTicketOrderFunc, place)
         }
     },
     watchUpdateProductOrderAddress: function* () {

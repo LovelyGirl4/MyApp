@@ -8,17 +8,18 @@ class TicketOrder extends Component {
         super(props)
     }
     render() {
+        const { ticketOrder, navigation } = this.props
         return <View>
-            <TicketOrderComponent/>
+            <TicketOrderComponent ticketOrder={ticketOrder} navigation={navigation}/>
         </View>
     }
 }
 
 export default connect(
-    () => ({
-
+    ({order}) => ({
+        ticketOrder: order.data.ticketOrder
     }),
     {
-
+    
     }
 )(TicketOrder)

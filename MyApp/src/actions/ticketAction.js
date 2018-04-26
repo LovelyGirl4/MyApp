@@ -1,6 +1,6 @@
-import { FETCH_TICKETS } from '../constants/ActionTypes'
+import * as ActionTypes from '../constants/ActionTypes'
 
 export const fetchTickets = (pagination) => ({
-    type: FETCH_TICKETS,
+    type: ActionTypes.FETCH_TICKETS,
     pagination
 })

@@ -14,12 +14,9 @@ export default class TicketDetail extends PureComponent {
         super(props)
     }
 
-    _toTicketOrder = () => {
-        this.props.navigation.navigate('TicketOrder')
-    }
 
     render() {
-        const {navigation} = this.props
+        const { navigation, _toTicketOrder } = this.props
         const { id, name, images } = navigation.state.params.ticket
         const source = images.length > 0 ? { uri: baseURL(images[0].url) } : noPicture
         return <ScrollView>
@@ -45,7 +42,7 @@ export default class TicketDetail extends PureComponent {
                     </Text>
                 </Item>
                 <Item
-                    extra={<Button type='warning' style={styles.button} onClick={this._toTicketOrder}>￥20</Button>}
+                    extra={<Button type='warning' style={styles.button} onClick={_toTicketOrder}>￥20</Button>}
                     style={styles.ticketItem}
                 >
                     杭州动物园成人票
@@ -61,7 +58,7 @@ export default class TicketDetail extends PureComponent {
                     </View>
                 </Item>
                 <Item
-                    extra={<Button type='warning' style={styles.button} onClick={this._toTicketOrder}>
+                    extra={<Button type='warning' style={styles.button} onClick={_toTicketOrder}>
                         ￥40
                     </Button>}
                     style={styles.ticketItem}

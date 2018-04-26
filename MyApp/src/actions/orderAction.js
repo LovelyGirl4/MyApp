@@ -5,6 +5,11 @@ export const addProductOrder = (product) => ({
     product
 })
 
+export const addTicketOrder = (place) => ({
+    type: ActionTypes.ADD_TICKET_ORDER,
+    place
+})
+
 export const updateProductOrderAddress = (address) => ({
     type: ActionTypes.UPDATE_PRODUCT_ORDER_ADDRESS,
     address

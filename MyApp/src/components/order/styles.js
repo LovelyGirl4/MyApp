@@ -1,10 +1,12 @@
 'use strict'
-import { StyleSheet } from 'react-native'
+import { StyleSheet, Dimensions } from 'react-native'
 
 const blue = '#1890ff'
 const red = '#ff4d4f'
 const white = '#fff'
 const grey = '#ccc'
+
+const { height, width } = Dimensions.get('window')
 
 const styles = StyleSheet.create({
     addAddressView: {
@@ -97,6 +99,50 @@ const styles = StyleSheet.create({
         marginTop: 15,
     },
     red: {
+        color: red
+    },
+    note: {
+        fontSize: 14,
+        color: blue,
+    },
+    note1: {
+        fontSize: 14,
+        color: grey
+    },
+    note2: {
+        fontSize: 14,
+        color: red
+    },
+    // calendar
+    calContainer: {
+        flexDirection: 'row',
+        marginTop: 15
+    },
+    calItem: {
+        width: (width - 54) / 4,
+        borderWidth: 0.8,
+        borderColor: grey,
+        borderRadius: 5,
+        marginRight: 8,
+        height: 45,
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+    calMoreItem: {
+        flexDirection: 'row',
+        width: (width - 54) / 4,
+        borderWidth: 0.8,
+        borderColor: grey,
+        borderRadius: 5,
+        marginRight: 8,
+        height: 45,
+        justifyContent: 'flex-end',
+        alignItems: 'center'
+    },
+    calDate: {
+        color: 'grey'
+    },
+    calPrice: {
         color: red
     }
 })
