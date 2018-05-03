@@ -3,8 +3,8 @@ import { StackNavigator } from 'react-navigation'
 import { Text, View } from 'react-native'
 
 import Profile from './Profile'
-import Setting from './Setting'
 import AddressList from './AddressList'
+import { tabHeaderHeight } from '../../utils/dimensions'
 
 import { MyAddressComponent, MyScanComponent, MyLocationComponent } from '../../components/index'
 // ProductDetail.navigationOptions = {
@@ -13,13 +13,6 @@ import { MyAddressComponent, MyScanComponent, MyLocationComponent } from '../../
 
 const MyStack = StackNavigator(
     {
-        Setting: {
-            path: 'setting',
-            screen: Setting,
-            navigationOptions: {
-                title: '设置',
-            }
-        },
         Scan: {
             screen: MyScanComponent,
             navigationOptions: {
@@ -41,7 +34,10 @@ const MyStack = StackNavigator(
                         <View>
                             <Text onPress={() => navigation.navigate('Setting')}>设置</Text>
                         </View>
-                    )
+                    ),
+                    headerStyle: {
+                        height: tabHeaderHeight
+                    },
                 }
             }
         },

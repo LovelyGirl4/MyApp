@@ -1,10 +1,12 @@
 // 门票下单
 import React, { PureComponent } from 'react'
-import { View, Text, Dimensions, ScrollView, Image } from 'react-native'
+import { View, Text, ScrollView, Image } from 'react-native'
 import { Flex, List, WhiteSpace, Stepper } from 'antd-mobile'
 import moment from 'moment'
 import styles from './styles'
 import Calendar from './Calendar'
+import { height, width, tabHeaderHeight } from '../../utils/dimensions'
+
 
 const Item = List.Item
 
@@ -54,7 +56,7 @@ export default class TicketOrder extends PureComponent {
     render() {
         const { ticketOrder } = this.props
         const { selectDate, calendarShow, number} = this.state
-        const scrollHeight = Dimensions.get('window').height - 60 - 60
+        const scrollHeight = height - 60 - 60
 
         return <View>
             <ScrollView style={{height: scrollHeight}}>

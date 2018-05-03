@@ -52,7 +52,7 @@ class Login extends Component {
                 </InputItem>
                 <InputItem
                     // {...getFieldProps('password')}
-                    // type="password"
+                    type="password"
                     placeholder="请输入密码"
                     // value={password}
                     onChange={this._handleChange('password')}

@@ -1,12 +1,13 @@
 import React, { PureComponent } from 'react'
 import { FlatList, TouchableOpacity, Text, View, ScrollView,
-    Image, Dimensions } from 'react-native'
+    Image } from 'react-native'
 import { Flex, Checkbox, Tag, Modal, Button, Toast } from 'antd-mobile'
 import { SwipeRow } from 'react-native-swipe-list-view'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import noPicture from '../../asset/no_picture.gif'
 import { baseURL } from '../../common/index'
 import ProductNumber from './ProductNumber'
+import { height, tabHeaderHeight } from '../../utils/dimensions'
 import styles from './styles'
 
 const alert = Modal.alert
@@ -160,8 +161,8 @@ class ProductList extends PureComponent {
     render() {
         const { check } = this.state
         const { cartProducts, cartEdit, fetchCartProductsUI } = this.props
-
-        const height = Dimensions.get('window').height - 90 - 80
+        
+        const scrollHeight = height - tabHeaderHeight - 80
 
         let sumCount = 0, sumMoney = 0
         const data = cartProducts.map((t, index) => {
@@ -173,7 +174,7 @@ class ProductList extends PureComponent {
         })
         return (
             <View>
-                <ScrollView style={{ height: height }}>
+                <ScrollView style={{ height: scrollHeight }}>
                     <FlatList
                         ref={ref => this.flatList = ref}
                         data={data}

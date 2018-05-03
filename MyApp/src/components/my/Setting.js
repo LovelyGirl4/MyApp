@@ -1,8 +1,8 @@
 import React, { PureComponent } from 'react'
-import { FlatList, TouchableOpacity, Text, View, TextInput, ScrollView, Image,
-    Dimensions} from 'react-native'
+import { FlatList, TouchableOpacity, Text, View, TextInput, ScrollView, Image } from 'react-native'
 import { Button, List, Flex, WhiteSpace } from 'antd-mobile'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
+import { height, headerHeight } from '../../utils/dimensions'
 const Item = List.Item
 
 export default class Setting extends PureComponent {
@@ -17,10 +17,10 @@ export default class Setting extends PureComponent {
     render() {
         const { profile, navigation } = this.props
         const { first_name, surname, email } = profile
-        const height = Dimensions.get('window').height - 90 - 70
+        const scrollHeight = height - headerHeight - 70
         return (
             <View>
-                <ScrollView style={{ height: height }}>
+                <ScrollView style={{ height: scrollHeight }}>
                     <List>
                         <Item multipleLine onClick={() => { }} style={{ height: 90 }}>
                             <Flex>

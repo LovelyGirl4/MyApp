@@ -48,7 +48,7 @@ class ProductDetail extends PureComponent {
         const { name, id, images, product_id } = item
         const { showModal, number } = this.state
         const source = images.length > 0 ? { uri: baseURL(images[0].url) } : noPicture
-
+        console.log('showModal:', showModal)
         return <View>
             <Image source={source} style={styles.img} />
             <Text style={styles.price}>￥ 200</Text>
@@ -62,7 +62,7 @@ class ProductDetail extends PureComponent {
                 </Flex.Item>
             </Flex>
             <ProductModal item={item} number={number} showModal={showModal} _closeModal={this._closeModal}
-                _sure={this._sure} _changeNumber={this._changeNumber}/>
+                _sure={this._sure} _changeNumber={this._changeNumber} /> 
         </View>
     }
 }

@@ -5,6 +5,7 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import { TicketList } from '../ticket/index'
 import { ProductList } from '../product/index'
 import { CartProductList, CartEdit } from '../cart/index'
+import { tabHeaderHeight, tabFooterHeight } from '../../utils/dimensions'
 import My from '../my/index'
 
 const TabRouteConfigs = {  // 表示各个页面路由配置,让导航器知道需要导航的路由对应的页面
@@ -12,8 +13,10 @@ const TabRouteConfigs = {  // 表示各个页面路由配置,让导航器知道�
         screen: TicketList,  // 对应的路由页面
         navigationOptions: ({ navigation }) => ({
             title: '首页',
-            headerBackTitle: null,
             headerLeft: null,
+            headerStyle: {
+                height: tabHeaderHeight
+            },
             tabBarIcon: ({ focused, tintColor }) => {
                 return <Icon name={focused ? 'home' : 'home-outline'} size={28} color={tintColor} />
             }
@@ -24,6 +27,9 @@ const TabRouteConfigs = {  // 表示各个页面路由配置,让导航器知道�
         navigationOptions: {  // 指定路由页面的配置选项
             title: '特产',  // 可用作头部标题 headerTitle ，或者Tab标题 tabBarLabel
             headerLeft: null,
+            headerStyle: {
+                height: tabHeaderHeight
+            },
             tabBarIcon: ({ focused, tintColor }) => {
                 return <Icon name={focused ? 'mushroom' : 'mushroom-outline'} size={28} color={tintColor} />
             },
@@ -36,6 +42,9 @@ const TabRouteConfigs = {  // 表示各个页面路由配置,让导航器知道�
                 title: '购物车',
                 headerLeft: null,
                 headerRight: (<CartEdit />),
+                headerStyle: {
+                    height: tabHeaderHeight
+                },
                 tabBarIcon: ({ focused, tintColor }) => {
                     return <Icon name={focused ? 'cart' : 'cart-outline'} size={28} color={tintColor} />
                 }
@@ -67,6 +76,9 @@ const TabNavigatorConfigs = {
         showLabel: true,
         showIcon: true,
         indicatorStyle: { height: 0 },
+        style: {
+            height: tabFooterHeight
+        }
     } // 在属性TabBarBottom与TabBarTop中有所不同
 }
 const TabRouter = TabNavigator(TabRouteConfigs, TabNavigatorConfigs)

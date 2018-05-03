@@ -7,8 +7,10 @@ import { TicketDetail } from '../ticket/index'
 import { ProductOrder, CheckAddress, TicketOrder } from '../order/index'
 import { ProductDetail } from '../product/index'
 import AddressList from '../my/AddressList'
+import Setting from '../my/Setting'
 import { MyAddressComponent } from '../../components/index'
 import TabRouter from './TabRouter'
+import { headerHeight } from '../../utils/dimensions'
 
 // Stack
 const StackRouteConfigs = {
@@ -19,7 +21,10 @@ const StackRouteConfigs = {
         path: 'ticketDetail/:id',
         screen: TicketDetail,
         navigationOptions: {
-            title: '景点详情'
+            title: '景点详情',
+            headerStyle: {
+                height: headerHeight
+            }
         }
     },
     Login: { // 登录
@@ -31,20 +36,29 @@ const StackRouteConfigs = {
     ProductOrder: { // 商品下订单
         screen: ProductOrder,
         navigationOptions: {
-            title: '确认订单'
+            title: '确认订单',
+            headerStyle: {
+                height: headerHeight
+            }
         }
     },
     TicketOrder: { // 购票下单
         screen: TicketOrder,
         navigationOptions: {
-            title: '提交订单'
+            title: '提交订单',
+            headerStyle: {
+                height: headerHeight
+            }
         }
     },
     AddressList: { // 地址列表
         path: 'addressList',
         screen: AddressList,
         navigationOptions: {
-            title: '管理收货地址'
+            title: '管理收货地址',
+            headerStyle: {
+                height: headerHeight
+            }
         }
     },
     AddAddress: { // 新增地址
@@ -60,6 +74,9 @@ const StackRouteConfigs = {
                         <Text onPress={() => _addSaveAddress(address)} style={styles.titleRight}>保存</Text>
                     </View>
                 ),
+                headerStyle: {
+                    height: headerHeight
+                }
             }
         }
     },
@@ -77,6 +94,9 @@ const StackRouteConfigs = {
                         </Text>
                     </View>
                 ),
+                headerStyle: {
+                    height: headerHeight
+                }
             }
         }
     },
@@ -92,6 +112,9 @@ const StackRouteConfigs = {
                         </Text>
                     </View>
                 ),
+                headerStyle: {
+                    height: headerHeight
+                }
             }
         }
     },
@@ -100,6 +123,19 @@ const StackRouteConfigs = {
         screen: ProductDetail,
         navigationOptions: {
             title: '商品详情',
+            headerStyle: {
+                height: headerHeight
+            }
+        }
+    },
+    Setting: {
+        path: 'setting',
+        screen: Setting,
+        navigationOptions: {
+            title: '设置',
+            headerStyle: {
+                height: headerHeight
+            }
         }
     }
 }

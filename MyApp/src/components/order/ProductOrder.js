@@ -1,12 +1,13 @@
 // 商品下单
 import React, { Component } from 'react'
-import { View, Text, Dimensions, ScrollView, Image } from 'react-native'
+import { View, Text, ScrollView, Image } from 'react-native'
 import { Flex, List, WhiteSpace, InputItem, Modal } from 'antd-mobile'
 import Icon from 'react-native-vector-icons/MaterialIcons'
 import styles from './styles'
 import Line from './Line'
 import noPicture from '../../asset/no_picture.gif'
 import { baseURL } from '../../common/index'
+import { height, width, tabHeaderHeight } from '../../utils/dimensions'
 
 const Item = List.Item
 
@@ -36,10 +37,7 @@ class Location extends Component {
         })
     }
     render() {
-        // Todo
-        const {width, height} = Dimensions.get('window')
-        // const count = parseInt(width / 10)
-        const scrollHeight = height - 60 - 60
+        const scrollHeight = height - tabHeaderHeight - 80
         const { address, productOrder, productOrderAddress } = this.props
         let checkAddress
         if (productOrderAddress) {
