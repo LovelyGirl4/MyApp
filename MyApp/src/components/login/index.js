@@ -51,8 +51,8 @@ class Login extends Component {
                     <Icon name="account-outline" size={28} color="#4F8EF7" />
                 </InputItem>
                 <InputItem
-                    {...getFieldProps('password')}
-                    type="password"
+                    // {...getFieldProps('password')}
+                    // type="password"
                     placeholder="请输入密码"
                     // value={password}
                     onChange={this._handleChange('password')}

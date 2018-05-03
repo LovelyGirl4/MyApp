@@ -1,7 +1,7 @@
 import { put, take, fork, call, select } from 'redux-saga/effects'
 import { DO_LOGIN, DO_LOGIN_SUCCESS, DO_LOGIN_ERROR, TOKEN_LOGIN, TOKEN_LOGIN_SUCCESS } from '../constants/ActionTypes'
 import { doLogin } from '../api/index'
-import { saveStorage } from '../storage'
+import { saveStorage, storage } from '../storage'
 
 function* doLoginFunc(username, password) {
     try {

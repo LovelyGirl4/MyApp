@@ -13,6 +13,7 @@ const TabRouteConfigs = {  // 表示各个页面路由配置,让导航器知道�
         navigationOptions: ({ navigation }) => ({
             title: '首页',
             headerBackTitle: null,
+            headerLeft: null,
             tabBarIcon: ({ focused, tintColor }) => {
                 return <Icon name={focused ? 'home' : 'home-outline'} size={28} color={tintColor} />
             }
@@ -22,7 +23,7 @@ const TabRouteConfigs = {  // 表示各个页面路由配置,让导航器知道�
         screen: ProductList,
         navigationOptions: {  // 指定路由页面的配置选项
             title: '特产',  // 可用作头部标题 headerTitle ，或者Tab标题 tabBarLabel
-            // header: null,
+            headerLeft: null,
             tabBarIcon: ({ focused, tintColor }) => {
                 return <Icon name={focused ? 'mushroom' : 'mushroom-outline'} size={28} color={tintColor} />
             },
@@ -33,7 +34,7 @@ const TabRouteConfigs = {  // 表示各个页面路由配置,让导航器知道�
         navigationOptions: ({ navigation }) => {
             return {
                 title: '购物车',
-                // header: null,
+                headerLeft: null,
                 headerRight: (<CartEdit />),
                 tabBarIcon: ({ focused, tintColor }) => {
                     return <Icon name={focused ? 'cart' : 'cart-outline'} size={28} color={tintColor} />
