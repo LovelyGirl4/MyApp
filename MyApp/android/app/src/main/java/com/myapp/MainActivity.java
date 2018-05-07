@@ -1,4 +1,4 @@
-package com.myapp;
+package com.obenben.zht.app;
 
 import com.facebook.react.ReactActivity;
 import com.oblador.vectoricons.VectorIconsPackage;

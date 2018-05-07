@@ -47,7 +47,8 @@ const TabRouteConfigs = {  // 表示各个页面路由配置,让导航器知道�
                 },
                 tabBarIcon: ({ focused, tintColor }) => {
                     return <Icon name={focused ? 'cart' : 'cart-outline'} size={28} color={tintColor} />
-                }
+                },
+                gesturesEnabled: false
             }
         }
     },
@@ -68,6 +69,7 @@ const TabNavigatorConfigs = {
     tabBarComponent: TabBarBottom, // Tab选项卡组件，有 TabBarBottom 和 TabBarTop 两个值，在iOS中默认为 TabBarBottom ，在Android中默认为 TabBarTop 。
     tabBarPosition: 'bottom', // 设置选项卡的位置，在顶部或是底部，有'top'与'bottom'可选
     lazy: true,  // 是否懒加载页面
+    swipeEnabled: false,
     tabBarOptions: {
         activeBackgroundColor: 'white',
         activeTintColor: '#40a9ff',

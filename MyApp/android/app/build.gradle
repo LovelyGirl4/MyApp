@@ -98,7 +98,7 @@ android {
     buildToolsVersion "26.0.2" // 23.0.1
 
     defaultConfig {
-        applicationId "com.myapp"
+        applicationId "com.obenben.zht.app"
         minSdkVersion 16
         targetSdkVersion 22
         versionCode 1
@@ -114,6 +114,16 @@ android {
             keyAlias MYAPP_RELEASE_KEY_ALIAS
             keyPassword MYAPP_RELEASE_KEY_PASSWORD
         }
+        debug {
+            storeFile file("/Users/xiaoping/.android/debug.keystore")//keystore文件，可以是文件路径，不过我建议把keystore放到跟debug.keystore同级目录下，这样直接填写文件名就好了
+            storePassword "123456" //密码
+            keyAlias "androiddebugkey"   //别名
+            keyPassword "123456"    //密码  跟上面那个密码可能不一样，看自己的keystore是怎么设置的
+        }
+    }
+    lintOptions {
+        checkReleaseBuilds false
+        abortOnError false
     }
     splits {
         abi {

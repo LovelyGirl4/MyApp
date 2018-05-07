@@ -7,7 +7,7 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import noPicture from '../../asset/no_picture.gif'
 import { baseURL } from '../../common/index'
 import ProductNumber from './ProductNumber'
-import { height, tabHeaderHeight } from '../../utils/dimensions'
+import { bodyHeight } from '../../utils/dimensions'
 import styles from './styles'
 
 const alert = Modal.alert
@@ -96,7 +96,7 @@ class ProductList extends PureComponent {
             <SwipeRow leftOpenValue={0} rightOpenValue={-75}
                 disableRightSwipe={true} >
                 <View style={styles.rowBack}>
-                    <Text style={styles.rowBackText} onPress={() => this._deleteProduct(id)}>删  除</Text>
+                    <Text style={styles.rowBackText} onPress={() => this._deleteProduct(id)}>删 除</Text>
                 </View>
                 <CheckboxItem onChange={(e) => this._changeCheck(id, e.target.checked)} checked={checked}>
                     <Flex style={styles.grid}>
@@ -162,7 +162,7 @@ class ProductList extends PureComponent {
         const { check } = this.state
         const { cartProducts, cartEdit, fetchCartProductsUI } = this.props
         
-        const scrollHeight = height - tabHeaderHeight - 80
+        const scrollHeight = bodyHeight - 80
 
         let sumCount = 0, sumMoney = 0
         const data = cartProducts.map((t, index) => {

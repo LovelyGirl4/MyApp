@@ -1,4 +1,4 @@
-package com.myapp;
+package com.obenben.zht.app;
 
 import android.app.Application;
 
